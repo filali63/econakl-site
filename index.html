@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Doodle Jump</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div id="game-wrapper">
+    <div id="score-display">Score: <span id="score">0</span></div>
+    <canvas id="canvas" width="400" height="600"></canvas>
+    <div id="overlay" class="visible">
+      <div id="overlay-content">
+        <h1>Doodle Jump</h1>
+        <p id="overlay-score"></p>
+        <button id="start-btn">Jouer</button>
+      </div>
+    </div>
+  </div>
+  <div id="controls-hint">← → pour bouger &nbsp;|&nbsp; Mobile: inclinez l'écran</div>
+  <script src="game.js"></script>
+</body>
+</html>
