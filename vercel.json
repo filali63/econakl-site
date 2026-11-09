@@ -1,0 +1,15 @@
+{
+  "redirects": [
+    {
+      "source": "/:path*",
+      "has": [
+        {
+          "type": "host",
+          "value": "econakl.com"
+        }
+      ],
+      "destination": "https://www.econakl.com/:path*",
+      "permanent": true
+    }
+  ]
+}
