@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Econakl | Transport exceptionnel et project cargo depuis le Maroc</title>
+  <meta name="description" content="Econakl étudie l’itinéraire, obtient les autorisations et organise les convois hors gabarit depuis le Maroc vers l’Europe et l’Afrique de l’Ouest." />
+  <link rel="canonical" href="https://www.econakl.com/" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Econakl | Transport exceptionnel depuis le Maroc" />
+  <meta property="og:description" content="Décrivez votre charge, voyez l’itinéraire et recevez une étude de route." />
+  <meta property="og:url" content="https://www.econakl.com/" />
+  <meta name="theme-color" content="#15212c" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/v3.css" />
+</head>
+<body>
+  <a class="btn btn-ink" href="#contenu" style="position:absolute;left:-9999px;top:8px" onfocus="this.style.left='8px'" onblur="this.style.left='-9999px'">Aller au contenu</a>
+
+  <header class="top" id="top">
+    <div class="wrap">
+      <a class="logo" href="./" aria-label="Econakl, accueil">
+        <svg class="logo-mark" viewBox="0 0 26 18" aria-hidden="true"><rect x="0" y="0" width="26" height="18" rx="3" fill="#15212c"/><path d="M6 3 V8 L12 14 H20" stroke="#ff5b1f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="14" r="2.2" fill="#ff5b1f"/></svg>
+        Econakl
+      </a>
+      <nav class="menu" id="menu" aria-label="Navigation principale">
+        <a href="../services.html">Services</a>
+        <a href="../network.html">Réseau</a>
+        <a href="https://app.econakl.com">Suivi client</a>
+        <a href="../company.html">Société</a>
+        <a class="lang" href="../en/" hreflang="en" lang="en">EN</a>
+      </nav>
+      <a class="btn btn-ink" href="#devis">Demander une étude</a>
+      <button class="burger" type="button" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+    </div>
+  </header>
+
+  <main id="contenu">
+    <!-- HERO + PLANNER -->
+    <section class="hero">
+      <div class="wrap intro">
+        <h1>Vos charges hors gabarit, du port jusqu’au chantier.</h1>
+        <p class="lead">Econakl étudie l’itinéraire, obtient les autorisations, organise le convoi et vous tient informé jusqu’à la livraison. Au Maroc, vers l’Europe et vers l’Afrique de l’Ouest.</p>
+      </div>
+      <div class="wrap hero-grid">
+        <div>
+
+          <form class="planner" id="planner" aria-labelledby="planner-title" novalidate>
+            <div class="planner-head">
+              <h2 id="planner-title">Décrivez votre charge</h2>
+              <span class="small muted">Lecture indicative en direct</span>
+            </div>
+
+            <div class="presets" role="group" aria-label="Exemples de charges">
+              <button type="button" data-preset="9,3.6,4.2,95">Transformateur</button>
+              <button type="button" data-preset="62,4.3,3.9,22">Pale d’éolienne</button>
+              <button type="button" data-preset="11,3.2,3.6,48">Engin de chantier</button>
+              <button type="button" data-preset="12,2.4,2.6,24">Conteneur 40 pieds</button>
+            </div>
+
+            <div class="fields">
+              <div class="field span-2">
+                <label for="from">Départ</label>
+                <select id="from" name="from">
+                  <option value="casa" selected>Casablanca</option>
+                  <option value="tanger">Tanger Med</option>
+                  <option value="agadir">Agadir</option>
+                </select>
+              </div>
+              <div class="field span-2">
+                <label for="to">Arrivée</label>
+                <select id="to" name="to">
+                  <optgroup label="Maroc">
+                    <option value="tanger">Tanger Med</option>
+                    <option value="kenitra">Kénitra</option>
+                    <option value="casa">Casablanca</option>
+                    <option value="marrakech">Marrakech</option>
+                    <option value="ouarzazate" selected>Ouarzazate</option>
+                    <option value="agadir">Agadir</option>
+                    <option value="laayoune">Laâyoune</option>
+                    <option value="dakhla">Dakhla</option>
+                  </optgroup>
+                  <optgroup label="Afrique de l’Ouest">
+                    <option value="nouakchott">Nouakchott</option>
+                    <option value="dakar">Dakar</option>
+                  </optgroup>
+                  <optgroup label="Europe">
+                    <option value="algeciras">Algeciras</option>
+                    <option value="madrid">Madrid</option>
+                    <option value="paris">Paris</option>
+                  </optgroup>
+                </select>
+              </div>
+              <div class="field">
+                <label for="len">Longueur</label>
+                <div class="unit" data-unit="m"><input id="len" name="len" type="number" inputmode="decimal" min="0" step="0.1" value="9" /></div>
+              </div>
+              <div class="field">
+                <label for="wid">Largeur</label>
+                <div class="unit" data-unit="m"><input id="wid" name="wid" type="number" inputmode="decimal" min="0" step="0.1" value="3.6" /></div>
+              </div>
+              <div class="field">
+                <label for="hei">Hauteur</label>
+                <div class="unit" data-unit="m"><input id="hei" name="hei" type="number" inputmode="decimal" min="0" step="0.1" value="4.2" /></div>
+              </div>
+              <div class="field">
+                <label for="wei">Poids</label>
+                <div class="unit" data-unit="t"><input id="wei" name="wei" type="number" inputmode="decimal" min="0" step="0.5" value="95" /></div>
+              </div>
+            </div>
+
+            <div class="verdict" aria-live="polite">
+              <div class="verdict-main" id="v-main" data-level="2">
+                <span class="tag"><i aria-hidden="true"></i><span id="v-tag">Convoi lourd</span></span>
+                <strong id="v-title">Étude d’itinéraire détaillée à prévoir</strong>
+                <p id="v-text">Ponts, giratoires et lignes électriques sont vérifiés sur tout le trajet avant le départ.</p>
+              </div>
+              <div class="verdict-side">
+                <div class="kv"><span>Matériel</span><b id="v-equip">Remorque modulaire</b></div>
+                <div class="kv"><span>Escorte</span><b id="v-escort">Probable</b></div>
+                <div class="kv"><span>Distance</span><b id="v-dist">440 km</b></div>
+                <div class="kv"><span>Passages</span><b id="v-cross">Aucun</b></div>
+              </div>
+            </div>
+
+            <div class="planner-foot">
+              <button class="btn btn-signal" type="button" id="send-plan">Envoyer cette demande</button>
+              <p class="small muted">Estimation générale, sans valeur réglementaire. Notre étude de route la confirme ou la corrige sous 48 heures ouvrées.</p>
+            </div>
+          </form>
+        </div>
+
+        <!-- Corridor map -->
+        <div class="map-panel">
+          <figure class="map" aria-label="Carte schématique des corridors Econakl">
+            <figcaption class="map-title"><b id="map-route">Casablanca vers Ouarzazate</b><span>Schéma, hors échelle</span></figcaption>
+            <svg viewBox="0 0 420 675" role="img" aria-labelledby="map-route">
+              <rect class="m-sea" x="0" y="160" width="420" height="22" />
+              <text class="m-label" x="300" y="176">Détroit de Gibraltar</text>
+                                                        <g id="edges"></g>
+              <path id="route" class="m-route" d="" />
+              <g id="nodes"></g>
+            </svg>
+            <div class="map-legend"><span><i class="r"></i>Itinéraire</span><span><i></i>Corridor</span><span><i class="f"></i>Traversée maritime</span></div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- LOADS -->
+    <section class="band paper" id="charges">
+      <div class="wrap">
+        <div class="head">
+          <h2>Ce qui ne rentre pas sur une remorque standard.</h2>
+          <p class="lead">Une semi-remorque classique mesure 13,6 mètres. Au-delà, chaque convoi demande un matériel adapté, une autorisation et un itinéraire vérifié.</p>
+        </div>
+        <div class="loads">
+          <div class="load"><div><h3>Pale d’éolienne</h3><p class="muted">Parcs éoliens, Sud et Atlantique</p></div><div class="scale" aria-hidden="true"><span class="ref"></span><span class="bar" style="--len:75"></span></div><p class="num">75 m<small>22 t</small></p></div>
+          <div class="load"><div><h3>Poutre de pont</h3><p class="muted">Ouvrages routiers et ferroviaires</p></div><div class="scale" aria-hidden="true"><span class="ref"></span><span class="bar" style="--len:42"></span></div><p class="num">42 m<small>80 t</small></p></div>
+          <div class="load"><div><h3>Cuve industrielle</h3><p class="muted">Chimie, agroalimentaire, process</p></div><div class="scale" aria-hidden="true"><span class="ref"></span><span class="bar" style="--len:24"></span></div><p class="num">24 m<small>Ø 5 m</small></p></div>
+          <div class="load"><div><h3>Engin minier</h3><p class="muted">Mines et carrières</p></div><div class="scale" aria-hidden="true"><span class="ref"></span><span class="bar" style="--len:14"></span></div><p class="num">14 m<small>110 t</small></p></div>
+          <div class="load"><div><h3>Transformateur de puissance</h3><p class="muted">Postes électriques, centrales solaires</p></div><div class="scale" aria-hidden="true"><span class="ref"></span><span class="bar" style="--len:9"></span></div><p class="num">9 m<small>120 t</small></p></div>
+        </div>
+        <div class="scale-key"><span><i></i>Semi-remorque standard, 13,6 m</span><span><b></b>Longueur de la charge</span><span>Dimensions types, données à titre d’exemple</span></div>
+      </div>
+    </section>
+
+    <!-- METHOD -->
+    <section class="band" id="methode">
+      <div class="wrap">
+        <div class="head">
+          <h2>Cinq étapes, un seul interlocuteur.</h2>
+          <p class="lead">Le même chef de projet suit votre dossier de l’étude jusqu’au procès-verbal de livraison.</p>
+        </div>
+        <ol class="steps">
+          <li><h3>Étude de route</h3><p>Relevé des ponts, giratoires, pentes et lignes électriques sur l’itinéraire envisagé.</p></li>
+          <li><h3>Autorisations</h3><p>Dossier de transport exceptionnel, escortes et créneaux de circulation.</p></li>
+          <li><h3>Chargement</h3><p>Choix de la remorque, plan d’arrimage et contrôle avant départ.</p></li>
+          <li><h3>Convoi suivi</h3><p>Position, étapes et incidents visibles dans votre espace client.</p></li>
+          <li><h3>Livraison</h3><p>Déchargement sur site, photos et dossier de clôture complet.</p></li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- TRACKING -->
+    <section class="band ink" id="suivi">
+      <div class="wrap track-grid">
+        <div>
+          <h2>Vous savez où est votre charge, sans appeler.</h2>
+          <ul class="points">
+            <li>Position et prochaine étape du convoi, mises à jour pendant le trajet.</li>
+            <li>Autorisations, CMR et photos de chargement réunies au même endroit.</li>
+            <li>Une alerte dès qu’un retard ou un incident change l’heure d’arrivée.</li>
+          </ul>
+          <a class="btn btn-signal" href="https://app.econakl.com">Ouvrir l’espace suivi</a>
+        </div>
+        <div>
+          <div class="screen" aria-label="Exemple d’écran de suivi">
+            <div class="screen-top">
+              <div><b>Transformateur 95 t</b><p class="small muted">Casablanca vers Ouarzazate</p></div>
+              <span class="pill">En route</span>
+            </div>
+            <div class="progress" aria-hidden="true"><i></i></div>
+            <div class="progress-legend"><span>Casablanca</span><span>Arrivée estimée jeudi, 14 h</span></div>
+            <ol class="timeline">
+              <li><time>Lun. 06:10</time><span class="dot"></span><span>Départ de Casablanca, escorte en place</span></li>
+              <li><time>Lun. 17:40</time><span class="dot"></span><span>Arrêt de nuit à Marrakech</span></li>
+              <li><time>Mer. 09:20</time><span class="dot"></span><span>Col du Tichka franchi</span></li>
+              <li class="next"><time>Jeu. 14:00</time><span class="dot"></span><span>Livraison sur site</span></li>
+            </ol>
+            <div class="screen-docs"><span>Autorisation TE.pdf</span><span>CMR.pdf</span><span>Photos chargement (12)</span></div>
+          </div>
+          <p class="caption">Écran d’exemple. Données fictives.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTORS -->
+    <section class="band paper" id="secteurs">
+      <div class="wrap">
+        <div class="head">
+          <h2>Pour les projets qui ne peuvent pas attendre.</h2>
+          <p class="lead">Nous travaillons pour les entreprises, les bureaux d’études et les chefs de chantier qui doivent livrer un équipement unique, à une date fixée.</p>
+        </div>
+        <div class="sectors">
+          <div class="sector"><h3>Énergie</h3><p>Pales, mâts, nacelles, panneaux solaires et transformateurs vers des sites isolés.</p></div>
+          <div class="sector"><h3>BTP et ouvrages</h3><p>Poutres, préfabriqués, grues et engins livrés dans l’ordre du chantier.</p></div>
+          <div class="sector"><h3>Industrie</h3><p>Cuves, lignes de production et machines-outils, du port à l’usine.</p></div>
+          <div class="sector"><h3>Mines</h3><p>Engins lourds et pièces de rechange vers les sites miniers du Maroc.</p></div>
+          <div class="sector"><h3>Ports et import</h3><p>Enlèvement sous douane à Casablanca, Tanger Med ou Agadir.</p></div>
+          <div class="sector"><h3>Export régional</h3><p>Convois vers la Mauritanie, le Sénégal et l’Europe du Sud.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="band ink" id="devis">
+      <div class="wrap contact-grid">
+        <div>
+          <h2>Recevez votre étude de route.</h2>
+          <p class="lead" style="margin-top:20px">Envoyez les dimensions, le poids, le départ et la date souhaitée. Un chef de projet vous répond avec un premier itinéraire et la liste des autorisations nécessaires.</p>
+          <div class="direct">
+            <a href="mailto:contact@econakl.com">contact@econakl.com</a>
+            <span class="muted">Casablanca, Maroc</span>
+          </div>
+        </div>
+        <form class="form" id="quote" novalidate>
+          <div class="field"><label for="q-name">Nom</label><input id="q-name" name="name" autocomplete="name" required /></div>
+          <div class="field"><label for="q-company">Société</label><input id="q-company" name="company" autocomplete="organization" /></div>
+          <div class="field"><label for="q-email">Email professionnel</label><input id="q-email" name="email" type="email" autocomplete="email" required /></div>
+          <div class="field"><label for="q-phone">Téléphone</label><input id="q-phone" name="phone" type="tel" autocomplete="tel" /></div>
+          <div class="field full"><label for="q-msg">Votre charge et votre trajet</label><textarea id="q-msg" name="message" required placeholder="Exemple : transformateur de 95 t, 9 × 3,6 × 4,2 m, de Casablanca à Ouarzazate, livraison souhaitée début mars."></textarea></div>
+          <div class="form-foot">
+            <button class="btn btn-signal" type="submit">Envoyer la demande</button>
+            <p class="form-status" id="q-status" role="status">Votre messagerie s’ouvre avec la demande prête à envoyer.</p>
+          </div>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <a class="logo" href="./">
+            <svg class="logo-mark" viewBox="0 0 26 18" aria-hidden="true"><rect x="0" y="0" width="26" height="18" rx="3" fill="#f4f5f5"/><path d="M6 3 V8 L12 14 H20" stroke="#ff5b1f" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/><circle cx="20" cy="14" r="2.2" fill="#ff5b1f"/></svg>
+            Econakl
+          </a>
+          <p style="margin-top:14px;max-width:24em">Transport exceptionnel et project cargo depuis Casablanca.</p>
+        </div>
+        <div><h4>Services</h4><ul><li><a href="../services.html">Transport exceptionnel</a></li><li><a href="../services.html">Project cargo</a></li><li><a href="https://app.econakl.com">Suivi client</a></li></ul></div>
+        <div><h4>Réseau</h4><ul><li><a href="../network.html">Maroc</a></li><li><a href="../network.html">Europe</a></li><li><a href="../network.html">Afrique de l’Ouest</a></li></ul></div>
+        <div><h4>Société</h4><ul><li><a href="../company.html">À propos</a></li><li><a href="#devis">Contact</a></li><li><a href="../legal.html">Mentions légales</a></li></ul></div>
+      </div>
+      <div class="foot-bottom"><span>© 2026 Econakl</span><span>Casablanca, Maroc</span></div>
+    </div>
+  </footer>
+
+  <script src="../assets/v3.js" defer></script>
+</body>
+</html>
