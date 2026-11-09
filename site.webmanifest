@@ -1,0 +1,17 @@
+{
+  "name": "Econakl Transport",
+  "short_name": "Econakl",
+  "description": "Transport lourd et colis exceptionnel au Maroc.",
+  "lang": "fr",
+  "start_url": "/",
+  "scope": "/",
+  "display": "browser",
+  "background_color": "#15191b",
+  "theme_color": "#15191b",
+  "icons": [
+    { "src": "/assets/favicon.svg", "type": "image/svg+xml", "sizes": "any" },
+    { "src": "/assets/icon-192.png", "type": "image/png", "sizes": "192x192" },
+    { "src": "/assets/icon-512.png", "type": "image/png", "sizes": "512x512" },
+    { "src": "/assets/apple-touch-icon.png", "type": "image/png", "sizes": "180x180" }
+  ]
+}
