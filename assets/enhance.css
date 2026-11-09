@@ -128,3 +128,5 @@
   .world-map-card { min-height: 440px; }
   .visual-tile { min-height: 380px; }
 }
+.marketing-band .kicker, .dark .kicker { color: var(--yellow); }
+@media (max-width: 980px) { .timeline-step { min-height: 0; } }
