@@ -1,247 +1,232 @@
-/* ECONAKL — design d'origine (vert / jaune), version « transporteur solide ».
-   Chargée après site.css : surfaces pleines, pas de verre ni de dégradé, pas d'animation. */
+/* ECONAKL Transport — direction artistique alignée sur Econakl Équipement.
+   Noir anthracite #15191b, jaune #f2c12b, blanc et gris très clair, Inter.
+   Chargée après site.css. Pas de verre, pas de dégradé décoratif, pas d'animation. */
 
 :root {
+  --ink: #15191b;
+  --yellow: #f2c12b;
+  --yellow-2: #ffd44a;
+  --pale: #f2f3f0;
+  --body: #5b6266;
+  --border: #d9dddc;
+  --cream: #ffffff;
+  --cream-2: #f2f3f0;
+  --line: #d9dddc;
   --glass: #ffffff;
-  --glass-dark: #183414;
+  --glass-dark: #15191b;
+  --shadow: none;
 }
 
-/* ---------- Plus aucune animation ni effet de survol qui « flotte » ---------- */
+/* ---------- Base ---------- */
 *, *::before, *::after { animation: none !important; }
-.word-reveal span { opacity: 1 !important; transform: none !important; filter: none !important; }
-.service-card:hover, .panel:hover, .product-card:hover, .contact-card:hover,
-.timeline-step:hover, .office-card:hover, .city-card:hover, .world-map-card:hover,
-.route-highlight:hover, .customer-story-grid.stories-visible .customer-story:hover {
-  transform: none !important;
-}
-.service-card:hover img, .product-card:hover img, .hero-photo:hover img, .visual-tile:hover img { transform: none !important; }
-.service-card, .panel, .product-card, .city-card, .timeline-step { transition: border-color 200ms ease; }
-.service-card:hover, .panel:hover, .product-card:hover, .city-card:hover, .timeline-step:hover { border-color: var(--ink); box-shadow: 0 12px 34px rgba(24, 52, 20, 0.06); }
 * { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+body { background: #fff; color: var(--ink); font-family: Inter, Arial, Helvetica, sans-serif; }
+.site-shell { background: #fff; border-radius: 0; box-shadow: none; }
+.word-reveal span { opacity: 1 !important; transform: none !important; filter: none !important; }
+p { color: inherit; }
 
-/* ---------- Bandeau du haut : uni ---------- */
-.topbar { background: var(--ink); color: var(--yellow); font-weight: 700; }
+/* Rien ne flotte au survol, seule la bordure réagit */
+.service-card:hover, .panel:hover, .product-card:hover, .contact-card:hover, .timeline-step:hover,
+.office-card:hover, .city-card:hover, .world-map-card:hover, .route-highlight:hover,
+.customer-story:hover, .customer-story-grid.stories-visible .customer-story:hover { transform: none !important; box-shadow: none !important; }
+.service-card:hover img, .product-card:hover img, .hero-photo:hover img, .visual-tile:hover img { transform: none !important; }
 
-/* ---------- Navigation : barre pleine, logo lisible, sans élargissement animé ---------- */
-.navbar { background: var(--cream); border-bottom: 1px solid rgba(24, 52, 20, 0.1); }
+/* ---------- Logo (trois barres inclinées, comme Équipement) ---------- */
+.brand { display: inline-flex; align-items: center; gap: 12px; color: #fff; font-size: 25px; font-weight: 800; letter-spacing: -1px; line-height: 1; text-decoration: none; text-shadow: none; }
+.brand-mark { display: flex; flex-direction: column; gap: 5px; width: 24px; transform: skew(-16deg); }
+.brand-mark i { display: block; width: 24px; height: 6px; background: var(--yellow); }
+.brand-mark i:nth-child(2) { width: 18px; }
+.brand-text small { display: block; margin-top: 8px; font-size: 8px; font-weight: 600; letter-spacing: 2.2px; color: var(--yellow); }
+.footer .brand { color: #fff; }
+
+/* ---------- En-tête : barre anthracite, sans bandeau au-dessus ---------- */
+.topbar { display: none; }
+.navbar { position: sticky; top: 0; z-index: 50; padding: 0; background: var(--ink); border-bottom: 1px solid rgba(255, 255, 255, 0.13); }
+.nav-inner { justify-content: space-between; min-height: 90px; gap: 42px; }
 .nav-pill, .nav-pill:hover, .nav-pill:focus-within {
-  width: min(820px, calc(100vw - 420px)); padding-inline: 24px;
-  background: var(--ink); border-color: var(--ink); box-shadow: none; transition: none;
+  width: auto; flex: 1; min-height: 0; padding: 0; border: 0; border-radius: 0; background: transparent; box-shadow: none;
+  justify-content: flex-start; gap: 56px; color: #fff; transition: none;
 }
-.brand { color: var(--yellow); text-shadow: none; }
-.brand-word { text-shadow: none; }
-.nav-links { font-weight: 650; }
-.nav-links a { color: #fff; opacity: 0.85; }
-.nav-links a:hover, .nav-links a.active { opacity: 1; text-decoration-color: var(--yellow); text-decoration-thickness: 2px; }
+.nav-links { gap: 32px; font-size: 14px; font-weight: 500; }
+.nav-links a { color: #fff; opacity: 0.78; padding: 6px 0; border-radius: 0; }
+.nav-links a:hover, .nav-links a.active { opacity: 1; text-decoration: none; box-shadow: inset 0 -2px 0 var(--yellow); }
+.nav-links a.lang-switch { border: 1px solid rgba(255, 255, 255, 0.4); background: transparent; color: #fff; border-radius: 0; min-height: 30px; padding: 4px 10px; box-shadow: none; }
+.nav-actions { position: static; }
+.nav-toggle { border-radius: 0; background: transparent; border-color: rgba(255, 255, 255, 0.4); color: #fff; }
 
-/* ---------- Boutons pleins ---------- */
-.btn-primary, .btn-primary:hover { background: var(--yellow); box-shadow: none; transform: none; }
-.btn-primary:hover { background: #e9b82f; }
-.btn-light { box-shadow: none; }
+/* ---------- Boutons : rectangulaires, flèche ↗ ---------- */
+.btn { border-radius: 0; min-height: 53px; padding: 15px 23px; gap: 25px; font-size: 14px; font-weight: 600; line-height: 1.4; box-shadow: none; transition: background 0.2s; }
+.btn-primary, .btn-primary:hover { background: var(--yellow); color: var(--ink); background-image: none; box-shadow: none; transform: none; }
+.btn-primary:hover { background: var(--yellow-2); }
+.btn-primary::after, .btn-light::after { content: "↗"; font-size: 15px; line-height: 1; }
+.btn-light { background: var(--ink); color: #fff; }
+.dark .btn-light, .section.dark .btn-light { background: var(--yellow); color: var(--ink); }
+.btn-link { min-height: 0; padding: 12px 0; gap: 35px; border-bottom: 1px solid #a2a9aa; color: var(--ink); font-size: 14px; font-weight: 550; display: inline-flex; justify-content: space-between; }
+.btn-link::after { content: "→"; }
 
-/* ---------- Typographie : titres maîtrisés ---------- */
-.hero h1 { font-size: clamp(3.1rem, 5.6vw, 6.3rem); line-height: 0.96; max-width: 720px; }
-.highlight { background: linear-gradient(transparent 60%, var(--yellow) 60%); }
-.section h2, .page-hero h1 { font-size: clamp(2.2rem, 3.8vw, 4.2rem); line-height: 1; max-width: 760px; letter-spacing: -0.045em; }
-.glass-panel h2 { font-size: clamp(2rem, 3.2vw, 3.5rem); margin-bottom: 18px; }
-.section-header { grid-template-columns: minmax(0, 1fr) minmax(260px, 0.48fr); gap: 56px; margin-bottom: 48px; }
-.section-header p { font-size: 1.06rem; line-height: 1.6; }
-.section { padding: 104px 0; }
-.hero-card strong, .metric strong { text-shadow: none; }
+/* ---------- Sur-titres : majuscules espacées + trait jaune ---------- */
+.eyebrow, .kicker {
+  display: inline-flex; align-items: center; gap: 13px; width: auto; padding: 0; border: 0; border-radius: 0; background: none;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; color: #676e72;
+}
+.eyebrow::before, .kicker::before { content: ""; width: 30px; height: 1px; border-radius: 0; background: var(--yellow); }
+.dark .kicker, .section.dark .kicker, .marketing-band .kicker, .hero .eyebrow { color: var(--yellow); }
+.mini-label { letter-spacing: 0.13em; font-weight: 600; font-size: 11px; }
+.hero-card .mini-label::before, .glass-panel .mini-label::before { width: 22px; height: 1px; border-radius: 0; background: var(--yellow); }
 
-/* ---------- Hero ---------- */
-.hero { padding: 64px 0 96px; }
-.hero-grid { grid-template-columns: minmax(0, 0.95fr) minmax(440px, 1.05fr); gap: 64px; }
-.hero-photo { inset: 40px 0 40px 40px; }
-.hero-photo::after { display: none; }
-.glass-card { background: #fff; border: 1px solid rgba(24, 52, 20, 0.12); }
-.hero-card { border-left: 6px solid var(--yellow); }
-.floating-card { top: 0; }
+/* ---------- Titres : Inter 550, serrés ---------- */
+h1, h2, h3 { font-family: Inter, Arial, Helvetica, sans-serif; }
+.section h2, .page-hero h1 { margin-top: 18px; max-width: 820px; font-size: clamp(38px, 4.1vw, 64px); font-weight: 550; line-height: 1.09; letter-spacing: -0.05em; }
+.glass-panel h2 { font-size: clamp(34px, 3.4vw, 54px); font-weight: 550; line-height: 1.08; letter-spacing: -0.05em; margin-bottom: 18px; }
+.service-card h3, .panel h3, .product-card h3, .contact-card h3, .city-card h3, .timeline-step h3 { font-weight: 600; letter-spacing: -0.03em; }
+.story-content h3, .map-info h3 { font-weight: 550; letter-spacing: -0.04em; }
+.brand-word { color: inherit; text-shadow: none; }
+.section-header { grid-template-columns: minmax(0, 1fr) minmax(260px, 390px); gap: 70px; align-items: end; margin-bottom: 45px; }
+.section-header p, .section p { color: var(--body); }
+.section-header p { line-height: 1.75; font-weight: 400; }
+.lead { font-weight: 400; }
 
-/* ---------- Bloc « méthode » : panneau vert plein sur la photo ---------- */
-.glass-stage { min-height: 0; background: var(--ink); }
-.glass-stage > img { opacity: 1; }
-.glass-panel { background: var(--ink); border-color: var(--ink); box-shadow: none; min-height: 0; margin: clamp(22px, 4vw, 54px); max-width: 1000px; }
-.callout, .callout:first-child { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); }
-.callout:first-child { border-color: var(--yellow); }
+/* ---------- Sections ---------- */
+.section { padding: 108px 0; background: #fff; }
+.section.alt { background: var(--pale); }
+.section.dark { background: var(--ink); color: #fff; }
+.section.dark p { color: #b8c0c1; }
 
-/* ---------- Cartes et chiffres : à plat ---------- */
-.service-card, .panel, .product-card, .contact-card, .city-card, .timeline-step, .office-card, .metric, .route-table-wrap { background: #fff; box-shadow: none; }
-.metric:nth-child(even) { background: #f6eccb; }
+/* ---------- Haut de page : photo plein cadre assombrie (comme Équipement) ---------- */
+.hero { position: relative; min-height: calc(100svh - 90px); max-height: 1060px; display: flex; align-items: flex-end; padding: 160px 0 110px; background: #202527; color: #fff; overflow: hidden; }
+.hero::before { content: ""; position: absolute; inset: 0; z-index: 1; pointer-events: none;
+  background: repeating-linear-gradient(90deg, transparent 0, transparent calc(25% - 1px), rgba(255, 255, 255, 0.047) calc(25% - 1px), rgba(255, 255, 255, 0.047) 25%); }
+.hero > .container, .hero-grid { position: static; display: block; width: min(1550px, 92%); }
+.hero-visual { position: absolute; inset: 0; min-height: 0; z-index: 0; }
+.hero-photo { position: absolute; inset: 0 !important; border-radius: 0; box-shadow: none; }
+.hero-photo img { width: 100%; height: 100%; object-fit: cover; }
+.hero-photo::after { display: block; content: ""; position: absolute; inset: 0;
+  background: linear-gradient(90deg, rgba(12, 17, 20, 0.86), rgba(12, 17, 20, 0.45) 60%, rgba(12, 17, 20, 0.15)), linear-gradient(rgba(12, 17, 20, 0.2), transparent 55%, rgba(12, 17, 20, 0.7)); }
+.hero-card, .floating-card { display: none; }
+.hero-grid > div:first-child { position: relative; z-index: 2; max-width: 860px; }
+.hero h1 { margin: 27px 0 0; max-width: 1000px; color: #fff; font-size: clamp(54px, 6.4vw, 104px); font-weight: 550; line-height: 1.03; letter-spacing: -0.065em; }
+.hero .highlight { background: none; color: var(--yellow); box-shadow: none; padding: 0; }
+.hero .lead { margin-top: 28px; max-width: 520px; color: #e2e5e4; font-size: 18px; line-height: 1.65; }
+.hero .actions { margin-top: 36px; gap: 12px; }
+.hero .btn-link { min-height: 53px; padding: 15px 23px; border: 1px solid rgba(255, 255, 255, 0.45); color: #fff; }
+
+/* ---------- Bande jaune de chiffres ---------- */
+.metric-strip { gap: 0; background: var(--yellow); border: 0; border-radius: 0; overflow: hidden; }
+.metric, .metric:nth-child(even) { background: transparent; border: 0; border-right: 1px solid rgba(21, 25, 27, 0.15); border-radius: 0; padding: 30px 28px; }
+.metric:last-child { border-right: 0; }
+.metric strong { font-family: Inter, Arial, sans-serif; font-size: clamp(34px, 3.4vw, 48px); font-weight: 600; letter-spacing: -0.05em; text-shadow: none; color: var(--ink); }
+.metric span { color: var(--ink); font-weight: 500; }
+
+/* ---------- Cartes : blanches, bordure fine, angles quasi droits ---------- */
+.service-card, .panel, .product-card, .contact-card, .city-card, .timeline-step, .office-card, .route-table-wrap, .callout,
+.world-map-card, .visual-tile, .glass-stage, .glass-panel, .customer-story, .marketing-band, .map-info, .map-card, .visual-caption,
+.route, .route-highlight, .form input, .form select, .form textarea, .form-status, .product-card img, .page-hero {
+  border-radius: 2px !important;
+}
+.service-card, .panel, .product-card, .contact-card, .city-card, .timeline-step, .office-card, .route-table-wrap {
+  background: #fff; border: 1px solid var(--border); box-shadow: none;
+}
+.service-card:hover, .panel:hover, .product-card:hover, .city-card:hover, .timeline-step:hover, .contact-card:hover { border-color: var(--ink); }
 .service-card { min-height: 0; }
 .service-card img { height: 250px; }
-.service-body { padding: 24px 26px 30px; }
-.chip { background: #f6eccb; border-color: #e8d48f; }
+.service-body { padding: 26px 28px 30px; }
+.chip { border: 0; border-radius: 0; background: #f6e9bb; color: var(--ink); min-height: 0; padding: 5px 8px; font-size: 12px; font-weight: 500; text-transform: none; letter-spacing: 0; }
+.feature-list li::before { background: var(--yellow); border-radius: 0; }
 
-/* ---------- Scénarios sectoriels : photo + voile vert uni, toujours lisibles ---------- */
+/* ---------- Bloc méthode : photo à gauche, texte sur anthracite ---------- */
+.glass-stage { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); min-height: 0; background: var(--ink); overflow: hidden; }
+.glass-stage > img { position: relative; inset: auto; width: 100%; height: 100%; min-height: 560px; object-fit: cover; opacity: 1; }
+.glass-panel { margin: 0; min-height: 0; padding: 85px 12%; background: var(--ink); border: 0; box-shadow: none; grid-template-columns: 1fr; color: #fff; }
+.glass-panel p { color: #b8c0c1; }
+.glass-panel .mini-label { color: var(--yellow); }
+.callout-grid { grid-column: 1; grid-row: auto; margin-top: 32px; }
+.callout, .callout:first-child { background: transparent; border: 0; border-top: 1px solid rgba(255, 255, 255, 0.18); border-radius: 0 !important; padding: 18px 0; }
+.callout span { color: var(--yellow); }
+.callout strong { color: #fff; font-weight: 550; }
+
+/* ---------- Scénarios sectoriels ---------- */
 .customer-story, .customer-story-grid.stories-visible .customer-story {
-  min-height: 420px; background: linear-gradient(rgba(24, 52, 20, 0.86), rgba(24, 52, 20, 0.86)), var(--story-image);
-  background-size: cover; background-position: center; box-shadow: none; border-color: transparent;
+  min-height: 400px; align-items: flex-start; padding: 32px; border: 0;
+  background: linear-gradient(rgba(21, 25, 27, 0.84), rgba(21, 25, 27, 0.84)), var(--story-image); background-size: cover; background-position: center; box-shadow: none;
 }
 .customer-story::before { display: none; }
+.customer-logo, .customer-story-grid.stories-visible .customer-logo { width: auto; height: auto; padding: 0; background: none; border: 0; box-shadow: none; transform: none; display: block; }
+.customer-logo.text-logo { color: var(--yellow); font-size: 12px; font-weight: 600; letter-spacing: 0.13em; text-transform: uppercase; }
 .story-content, .story-content h3, .story-content p { visibility: visible !important; opacity: 1 !important; transform: none !important; }
-.customer-logo { height: 76px; width: min(190px, 70%); box-shadow: none; }
-.customer-logo.text-logo { color: var(--ink); font-size: clamp(1.25rem, 2vw, 1.8rem); }
+.story-content { margin-top: 14px; }
+.story-content .chip { display: none; }
+.story-content h3 { color: #fff; font-size: clamp(26px, 2.2vw, 34px); line-height: 1.08; }
+.story-content p { color: #b8c0c1; }
 
-/* ---------- Bandeaux verts (« pourquoi », etc.) : voile uni sur la photo ---------- */
+/* ---------- Bandeau « pourquoi » ---------- */
 .marketing-band { background: var(--ink); box-shadow: none; }
-.marketing-band::before { background-image: linear-gradient(rgba(24, 52, 20, 0.9), rgba(24, 52, 20, 0.9)), var(--band-image, none); }
+.marketing-band::before { background-image: linear-gradient(rgba(21, 25, 27, 0.88), rgba(21, 25, 27, 0.88)), var(--band-image, none); }
 .marketing-band::after { display: none; }
-.marketing-band .timeline-step { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.18); }
-.marketing-band .timeline-step h3 { color: var(--cream); }
-.marketing-band .timeline-step p { color: rgba(248, 248, 241, 0.75); }
-.marketing-band .timeline-step:hover { border-color: var(--yellow); }
+.marketing-band h2 { color: #fff; }
+.marketing-band p { color: #b8c0c1; }
+.marketing-band .timeline-step { background: transparent; border: 0; border-top: 1px solid rgba(255, 255, 255, 0.2); border-radius: 0 !important; min-height: 0; padding: 22px 0 0; }
+.marketing-band .timeline-step h3 { color: #fff; }
+.timeline-step strong { border-radius: 0; background: var(--yellow); color: var(--ink); }
 
-/* ---------- Carte du monde : sans halo ---------- */
-.world-map-card { min-height: 520px; background: #fff; box-shadow: none; }
-.world-map-card.is-empty::after { content: "Chaque itinéraire est étudié mission par mission."; background: #fff; }
+/* ---------- Carte du monde, photos, tableau ---------- */
+.world-map-card { background: var(--pale); border: 0; box-shadow: none; }
+.world-map-card.is-empty::after { content: "Chaque itinéraire est étudié mission par mission."; border-radius: 0; background: #fff; }
 .map-overlay { background: none; }
-.map-info, .map-card { background: #fff; border-left: 6px solid var(--yellow); box-shadow: none; }
-
-/* ---------- Photos ---------- */
-.visual-tile { min-height: 460px; }
-.visual-caption { background: #fff; border-left: 6px solid var(--yellow); }
+.map-info, .map-card, .visual-caption { background: #fff; border: 0; border-left: 4px solid var(--yellow); box-shadow: none; }
+.visual-tile { box-shadow: none; }
 .hero-photo, .glass-stage, .world-map-card, .visual-tile { box-shadow: none; }
 .product-card.featured { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); }
 .product-card img { min-width: 0; }
+.route-table th { background: var(--ink); color: #fff; font-weight: 600; }
+.route-table tr:nth-child(even) td { background: var(--pale); }
+.route { border-radius: 0 !important; background: #fff; }
+.route-highlight span { background: var(--yellow); color: var(--ink); border-radius: 0; }
 
 /* ---------- Pages intérieures ---------- */
-.page-hero::before { background: rgba(248, 248, 241, 0.9); }
+.page-hero { background: var(--ink); color: #fff; }
+.page-hero::before { background: linear-gradient(90deg, rgba(12, 17, 20, 0.88), rgba(12, 17, 20, 0.5)); }
+.page-hero h1 { color: #fff; }
+.page-hero p { color: #e2e5e4; }
+.page-hero .eyebrow { color: var(--yellow); }
+
+/* ---------- Formulaires ---------- */
+.form input, .form select, .form textarea { background: #fff; border: 1px solid #c5cbca; }
+.form input:focus, .form select:focus, .form textarea:focus { border-color: var(--ink); box-shadow: 0 0 0 3px rgba(242, 193, 43, 0.35); outline: none; }
+
+/* ---------- Pied de page ---------- */
+.footer { background: var(--ink); color: #fff; border-top: 0; padding: 75px 0 28px; }
+.footer p, .footer li, .footer a { color: #b8c0c1; }
+.footer a:hover { color: #fff; }
+.footer h4 { color: var(--yellow); font-size: 12px; font-weight: 600; letter-spacing: 0.13em; }
 
 /* ---------- Mobile ---------- */
 @media (max-width: 980px) {
-  .hero-grid { grid-template-columns: 1fr; }
-  .hero-photo { inset: 30px 0 70px; }
-  .section-header { grid-template-columns: 1fr; gap: 18px; }
-  .customer-story, .customer-story-grid.stories-visible .customer-story { min-height: 0; }
-  .glass-panel { margin: 18px; grid-template-columns: 1fr; }
-  .callout-grid { grid-column: 1; grid-row: auto; margin-top: 26px; }
-  .nav-pill, .nav-pill:hover, .nav-pill:focus-within { width: auto; padding-inline: 18px; }
-}
-@media (max-width: 640px) {
-  .hero { padding: 36px 0 64px; }
-  .hero h1 { font-size: clamp(2.5rem, 11.5vw, 3.4rem); line-height: 1; }
-  .section h2, .page-hero h1 { font-size: clamp(1.95rem, 8.6vw, 2.6rem); line-height: 1.04; }
-  .glass-panel h2 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
-  .section { padding: 68px 0; }
-  .service-card img { height: 200px; }
-  .world-map-card { min-height: 440px; }
-  .visual-tile { min-height: 380px; }
-}
-.marketing-band .kicker, .dark .kicker { color: var(--yellow); }
-@media (max-width: 980px) { .timeline-step { min-height: 0; } }
-
-/* =====================================================================
-   Passe 2 — « transporteur solide » : angles nets, en-tête plein,
-   titres condensés type signalétique, moins d'ornements.
-   ===================================================================== */
-:root { --r: 6px; --head: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif; }
-
-/* Titres : police condensée robuste, interlettrage normal */
-.hero h1, .section h2, .page-hero h1, .glass-panel h2, .map-info h3, .customer-story h3, .story-content h3,
-.service-card h3, .panel h3, .product-card h3, .contact-card h3, .city-card h3, .timeline-step h3, .hero-card strong, .metric strong, .footer .brand, .brand {
-  font-family: var(--head); letter-spacing: 0; font-weight: 700;
-}
-.hero h1 { font-size: clamp(3.2rem, 6vw, 6.4rem); line-height: 0.95; font-weight: 800; }
-.section h2, .page-hero h1 { font-size: clamp(2.3rem, 4vw, 4.2rem); line-height: 1.02; }
-.glass-panel h2 { font-size: clamp(2.1rem, 3.4vw, 3.4rem); }
-.service-card h3, .panel h3, .product-card h3, .contact-card h3 { font-size: clamp(1.5rem, 2vw, 1.9rem); line-height: 1.05; }
-.story-content h3 { font-size: clamp(1.7rem, 2.2vw, 2.4rem); line-height: 1.05; letter-spacing: 0; }
-.metric strong { font-size: clamp(2.6rem, 4vw, 4rem); line-height: 1; }
-.brand { font-size: 1.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; }
-.highlight { background: linear-gradient(transparent 62%, var(--yellow) 62%); padding: 0 0.06em; }
-
-/* Bandeau du haut : jaune plein, comme une plaque « convoi exceptionnel » */
-.topbar { background: var(--yellow); color: var(--ink); min-height: 40px; font-size: 0.86rem; font-weight: 750; }
-
-/* En-tête : barre verte pleine sur toute la largeur */
-.navbar { background: var(--ink); border-bottom: 0; padding: 0; }
-.nav-inner { justify-content: space-between; min-height: 76px; }
-.nav-pill, .nav-pill:hover, .nav-pill:focus-within {
-  width: auto; flex: 1; min-height: 0; padding: 0; border: 0; border-radius: 0; background: transparent; justify-content: flex-start; gap: 48px;
-}
-.nav-links { gap: 30px; font-size: 0.95rem; }
-.nav-links a { padding: 6px 0; }
-.nav-links a.lang-switch { border-radius: var(--r); min-height: 30px; }
-.nav-actions { position: static; }
-.nav-actions .btn { min-height: 46px; }
-.nav-toggle { border-radius: var(--r); }
-
-/* Angles nets partout */
-.btn { border-radius: var(--r); font-weight: 750; }
-.btn-link { border-radius: 0; }
-.chip { border-radius: 3px; border: 0; background: var(--ink); color: var(--yellow); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; min-height: 26px; }
-.eyebrow { border-radius: 3px; border: 0; background: var(--ink); color: var(--yellow); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.74rem; }
-.eyebrow::before { background: var(--yellow); border-radius: 1px; }
-.site-shell { border-radius: 0; }
-.service-card, .panel, .product-card, .contact-card, .city-card, .timeline-step, .office-card, .metric,
-.route-table-wrap, .customer-story, .customer-story-grid.stories-visible .customer-story, .glass-stage, .glass-panel,
-.world-map-card, .visual-tile, .hero-photo, .hero-card, .marketing-band, .callout, .map-info, .map-card, .visual-caption,
-.route, .route-highlight, .form input, .form select, .form textarea, .form-status, .product-card img, .page-hero, .contact-card {
-  border-radius: var(--r) !important;
-}
-
-/* Hero : une seule photo, une seule carte en bas */
-.floating-card { display: none; }
-.hero-photo { inset: 0 0 0 40px; }
-.hero-card { left: 0; bottom: 32px; padding: 22px 26px; border: 0; border-left: 6px solid var(--yellow); box-shadow: 0 10px 30px rgba(24, 52, 20, 0.12); }
-.hero-card .mini-label::before { border-radius: 1px; background: var(--yellow); }
-
-/* Méthode : photo à gauche, panneau vert plein à droite */
-.glass-stage { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
-.glass-stage > img { position: relative; inset: auto; height: 100%; min-height: 420px; }
-.glass-panel { margin: 0; border-radius: 0 !important; grid-template-columns: 1fr; padding: clamp(28px, 4vw, 56px); }
-.callout-grid { grid-column: 1; grid-row: auto; margin-top: 28px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
-.callout { padding: 16px 18px; border-top: 4px solid rgba(255, 255, 255, 0.2) !important; }
-.callout:first-child { border-top-color: var(--yellow) !important; }
-.callout strong { font-size: 1.08rem; line-height: 1.25; display: block; }
-.callout span { color: var(--yellow); }
-
-/* Chiffres clés : une bande unique avec séparateurs */
-.metric-strip { gap: 0; background: #fff; border: 1px solid rgba(24, 52, 20, 0.12); border-radius: var(--r); overflow: hidden; }
-.metric, .metric:nth-child(even) { background: #fff; border: 0; border-right: 1px solid rgba(24, 52, 20, 0.12); border-radius: 0 !important; border-top: 5px solid var(--yellow); }
-.metric:last-child { border-right: 0; }
-
-/* Scénarios : titre de secteur en jaune, sans pastille blanche */
-.customer-logo, .customer-story-grid.stories-visible .customer-logo {
-  width: auto; height: auto; padding: 0; background: none; border: 0; box-shadow: none; transform: none; display: block; place-items: unset;
-}
-.customer-logo.text-logo { color: var(--yellow); font-family: var(--head); font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.08em; }
-.customer-story, .customer-story-grid.stories-visible .customer-story { align-items: flex-start; padding: 30px; min-height: 380px; }
-.story-content { margin-top: 10px; }
-.story-content .chip { display: none; }
-
-/* Étapes « pourquoi » : numéros carrés */
-.timeline-step strong { border-radius: 4px; }
-
-/* Carte réseau et tableau */
-.route { border-radius: 4px !important; }
-.route-table th { background: var(--ink); }
-
-/* Pied de page */
-.footer { border-top: 6px solid var(--yellow); }
-
-@media (max-width: 980px) {
-  .nav-inner { min-height: 64px; }
+  .nav-inner { min-height: 72px; }
   .nav-pill, .nav-pill:hover, .nav-pill:focus-within { flex-wrap: nowrap; justify-content: space-between; }
-  .nav-toggle { background: transparent; }
-  .has-mobile-nav .nav-links { top: 100%; left: 0; right: 0; border-radius: 0; border: 0; background: var(--ink); }
-  .has-mobile-nav .nav-links a { color: #fff; background: transparent; border: 0; border-bottom: 1px solid rgba(255,255,255,0.1); border-radius: 0; }
-  .hero-photo { inset: 0 0 60px; }
-  .hero-card { bottom: 0; }
+  .has-mobile-nav .nav-links { top: 100%; left: 0; right: 0; border-radius: 0; border: 0; background: var(--ink); padding: 8px 4% 20px; box-shadow: none; }
+  .has-mobile-nav .nav-links a { color: #fff; background: transparent; border: 0; border-bottom: 1px solid rgba(255, 255, 255, 0.1); border-radius: 0; padding: 15px 0; box-shadow: none; }
+  .hero { min-height: 640px; padding: 120px 0 64px; }
+  .section-header { grid-template-columns: 1fr; gap: 18px; }
   .glass-stage { grid-template-columns: 1fr; }
-  .glass-stage > img { min-height: 240px; height: 240px; }
-  .callout-grid { grid-template-columns: 1fr; }
+  .glass-stage > img { min-height: 260px; height: 260px; }
+  .glass-panel { padding: 44px 8%; }
   .metric-strip { grid-template-columns: 1fr 1fr; }
   .metric:nth-child(2) { border-right: 0; }
-  .customer-story, .customer-story-grid.stories-visible .customer-story { min-height: 0; padding: 24px; }
+  .metric:nth-child(-n+2) { border-bottom: 1px solid rgba(21, 25, 27, 0.15); }
+  .customer-story, .customer-story-grid.stories-visible .customer-story { min-height: 0; padding: 26px; }
+  .timeline-step { min-height: 0; }
 }
 @media (max-width: 640px) {
-  .hero h1 { font-size: clamp(2.7rem, 12.5vw, 3.6rem); }
-  .section h2, .page-hero h1 { font-size: clamp(2.1rem, 9.5vw, 2.8rem); }
-  .brand { font-size: 1.4rem; }
+  .brand { font-size: 21px; }
+  .hero { min-height: 600px; padding: 110px 0 48px; }
+  .hero h1 { font-size: clamp(42px, 12vw, 56px); letter-spacing: -0.055em; }
+  .hero .lead { font-size: 16px; }
+  .section { padding: 72px 0; }
+  .section h2, .page-hero h1 { font-size: clamp(32px, 9vw, 40px); }
+  .glass-panel h2 { font-size: clamp(30px, 8.5vw, 38px); }
+  .service-card img { height: 200px; }
   .metric-strip { grid-template-columns: 1fr; }
-  .metric, .metric:nth-child(even) { border-right: 0; }
+  .metric, .metric:nth-child(even) { border-right: 0; border-bottom: 1px solid rgba(21, 25, 27, 0.15); }
+  .metric:last-child { border-bottom: 0; }
 }
-.footer .brand { color: var(--yellow); }
-.world-map-card.is-empty::after { border-radius: var(--r); }
+.glass-panel p, .section p, .lead, .hero-card p, .metric span { font-weight: 400; }
