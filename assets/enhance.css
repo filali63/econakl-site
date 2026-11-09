@@ -642,3 +642,23 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
   .x-band .metric:first-child { padding-left: 28px; }
   main > .section.dark:last-child h2 { font-size: clamp(36px, 10.5vw, 46px); }
 }
+
+/* 24.7 Finitions */
+::selection { background: var(--yellow); color: var(--ink); }
+[id] { scroll-margin-top: 110px; }
+/* Tuiles secteurs : la photo reste visible en bas, le texte garde un fond sombre (lisibilité) */
+.customer-story {
+  background: linear-gradient(rgba(21, 25, 27, 0.9) 0, rgba(21, 25, 27, 0.86) 62%, rgba(21, 25, 27, 0.42) 100%), var(--story-image);
+  background-size: cover; background-position: center; min-height: 430px;
+}
+.story-rail { --story-image: url("https://images.unsplash.com/photo-1474487548417-781cb71495f3?q=70&w=900&auto=format&fit=crop"); }
+.story-industry { --story-image: url("https://images.unsplash.com/photo-1756888195243-989af187ba67?q=70&w=900&auto=format&fit=crop"); }
+.story-btp { --story-image: url("https://images.unsplash.com/photo-1777181922137-53d605b2cec1?q=70&w=900&auto=format&fit=crop"); }
+.x-story-engins { --story-image: url("https://images.unsplash.com/photo-1709735133497-bbead76953a9?q=70&w=900&auto=format&fit=crop"); }
+@media (max-width: 640px) {
+  /* Repères du dessin technique plus grands sur téléphone */
+  .gb-mark { transform-box: fill-box; transform-origin: center; transform: scale(1.75); }
+  .gb-cap { font-size: 22px; }
+  .customer-story { min-height: 0; }
+}
+.marketing-band.band-light .kicker { color: #676e72; }
