@@ -130,3 +130,118 @@
 }
 .marketing-band .kicker, .dark .kicker { color: var(--yellow); }
 @media (max-width: 980px) { .timeline-step { min-height: 0; } }
+
+/* =====================================================================
+   Passe 2 — « transporteur solide » : angles nets, en-tête plein,
+   titres condensés type signalétique, moins d'ornements.
+   ===================================================================== */
+:root { --r: 6px; --head: "Barlow Semi Condensed", "Arial Narrow", Arial, sans-serif; }
+
+/* Titres : police condensée robuste, interlettrage normal */
+.hero h1, .section h2, .page-hero h1, .glass-panel h2, .map-info h3, .customer-story h3, .story-content h3,
+.service-card h3, .panel h3, .product-card h3, .contact-card h3, .city-card h3, .timeline-step h3, .hero-card strong, .metric strong, .footer .brand, .brand {
+  font-family: var(--head); letter-spacing: 0; font-weight: 700;
+}
+.hero h1 { font-size: clamp(3.2rem, 6vw, 6.4rem); line-height: 0.95; font-weight: 800; }
+.section h2, .page-hero h1 { font-size: clamp(2.3rem, 4vw, 4.2rem); line-height: 1.02; }
+.glass-panel h2 { font-size: clamp(2.1rem, 3.4vw, 3.4rem); }
+.service-card h3, .panel h3, .product-card h3, .contact-card h3 { font-size: clamp(1.5rem, 2vw, 1.9rem); line-height: 1.05; }
+.story-content h3 { font-size: clamp(1.7rem, 2.2vw, 2.4rem); line-height: 1.05; letter-spacing: 0; }
+.metric strong { font-size: clamp(2.6rem, 4vw, 4rem); line-height: 1; }
+.brand { font-size: 1.7rem; font-weight: 800; text-transform: uppercase; letter-spacing: 0.02em; }
+.highlight { background: linear-gradient(transparent 62%, var(--yellow) 62%); padding: 0 0.06em; }
+
+/* Bandeau du haut : jaune plein, comme une plaque « convoi exceptionnel » */
+.topbar { background: var(--yellow); color: var(--ink); min-height: 40px; font-size: 0.86rem; font-weight: 750; }
+
+/* En-tête : barre verte pleine sur toute la largeur */
+.navbar { background: var(--ink); border-bottom: 0; padding: 0; }
+.nav-inner { justify-content: space-between; min-height: 76px; }
+.nav-pill, .nav-pill:hover, .nav-pill:focus-within {
+  width: auto; flex: 1; min-height: 0; padding: 0; border: 0; border-radius: 0; background: transparent; justify-content: flex-start; gap: 48px;
+}
+.nav-links { gap: 30px; font-size: 0.95rem; }
+.nav-links a { padding: 6px 0; }
+.nav-links a.lang-switch { border-radius: var(--r); min-height: 30px; }
+.nav-actions { position: static; }
+.nav-actions .btn { min-height: 46px; }
+.nav-toggle { border-radius: var(--r); }
+
+/* Angles nets partout */
+.btn { border-radius: var(--r); font-weight: 750; }
+.btn-link { border-radius: 0; }
+.chip { border-radius: 3px; border: 0; background: var(--ink); color: var(--yellow); font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.06em; min-height: 26px; }
+.eyebrow { border-radius: 3px; border: 0; background: var(--ink); color: var(--yellow); text-transform: uppercase; letter-spacing: 0.06em; font-size: 0.74rem; }
+.eyebrow::before { background: var(--yellow); border-radius: 1px; }
+.site-shell { border-radius: 0; }
+.service-card, .panel, .product-card, .contact-card, .city-card, .timeline-step, .office-card, .metric,
+.route-table-wrap, .customer-story, .customer-story-grid.stories-visible .customer-story, .glass-stage, .glass-panel,
+.world-map-card, .visual-tile, .hero-photo, .hero-card, .marketing-band, .callout, .map-info, .map-card, .visual-caption,
+.route, .route-highlight, .form input, .form select, .form textarea, .form-status, .product-card img, .page-hero, .contact-card {
+  border-radius: var(--r) !important;
+}
+
+/* Hero : une seule photo, une seule carte en bas */
+.floating-card { display: none; }
+.hero-photo { inset: 0 0 0 40px; }
+.hero-card { left: 0; bottom: 32px; padding: 22px 26px; border: 0; border-left: 6px solid var(--yellow); box-shadow: 0 10px 30px rgba(24, 52, 20, 0.12); }
+.hero-card .mini-label::before { border-radius: 1px; background: var(--yellow); }
+
+/* Méthode : photo à gauche, panneau vert plein à droite */
+.glass-stage { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+.glass-stage > img { position: relative; inset: auto; height: 100%; min-height: 420px; }
+.glass-panel { margin: 0; border-radius: 0 !important; grid-template-columns: 1fr; padding: clamp(28px, 4vw, 56px); }
+.callout-grid { grid-column: 1; grid-row: auto; margin-top: 28px; grid-template-columns: repeat(3, minmax(0, 1fr)); }
+.callout { padding: 16px 18px; border-top: 4px solid rgba(255, 255, 255, 0.2) !important; }
+.callout:first-child { border-top-color: var(--yellow) !important; }
+.callout strong { font-size: 1.08rem; line-height: 1.25; display: block; }
+.callout span { color: var(--yellow); }
+
+/* Chiffres clés : une bande unique avec séparateurs */
+.metric-strip { gap: 0; background: #fff; border: 1px solid rgba(24, 52, 20, 0.12); border-radius: var(--r); overflow: hidden; }
+.metric, .metric:nth-child(even) { background: #fff; border: 0; border-right: 1px solid rgba(24, 52, 20, 0.12); border-radius: 0 !important; border-top: 5px solid var(--yellow); }
+.metric:last-child { border-right: 0; }
+
+/* Scénarios : titre de secteur en jaune, sans pastille blanche */
+.customer-logo, .customer-story-grid.stories-visible .customer-logo {
+  width: auto; height: auto; padding: 0; background: none; border: 0; box-shadow: none; transform: none; display: block; place-items: unset;
+}
+.customer-logo.text-logo { color: var(--yellow); font-family: var(--head); font-size: 1.05rem; text-transform: uppercase; letter-spacing: 0.08em; }
+.customer-story, .customer-story-grid.stories-visible .customer-story { align-items: flex-start; padding: 30px; min-height: 380px; }
+.story-content { margin-top: 10px; }
+.story-content .chip { display: none; }
+
+/* Étapes « pourquoi » : numéros carrés */
+.timeline-step strong { border-radius: 4px; }
+
+/* Carte réseau et tableau */
+.route { border-radius: 4px !important; }
+.route-table th { background: var(--ink); }
+
+/* Pied de page */
+.footer { border-top: 6px solid var(--yellow); }
+
+@media (max-width: 980px) {
+  .nav-inner { min-height: 64px; }
+  .nav-pill, .nav-pill:hover, .nav-pill:focus-within { flex-wrap: nowrap; justify-content: space-between; }
+  .nav-toggle { background: transparent; }
+  .has-mobile-nav .nav-links { top: 100%; left: 0; right: 0; border-radius: 0; border: 0; background: var(--ink); }
+  .has-mobile-nav .nav-links a { color: #fff; background: transparent; border: 0; border-bottom: 1px solid rgba(255,255,255,0.1); border-radius: 0; }
+  .hero-photo { inset: 0 0 60px; }
+  .hero-card { bottom: 0; }
+  .glass-stage { grid-template-columns: 1fr; }
+  .glass-stage > img { min-height: 240px; height: 240px; }
+  .callout-grid { grid-template-columns: 1fr; }
+  .metric-strip { grid-template-columns: 1fr 1fr; }
+  .metric:nth-child(2) { border-right: 0; }
+  .customer-story, .customer-story-grid.stories-visible .customer-story { min-height: 0; padding: 24px; }
+}
+@media (max-width: 640px) {
+  .hero h1 { font-size: clamp(2.7rem, 12.5vw, 3.6rem); }
+  .section h2, .page-hero h1 { font-size: clamp(2.1rem, 9.5vw, 2.8rem); }
+  .brand { font-size: 1.4rem; }
+  .metric-strip { grid-template-columns: 1fr; }
+  .metric, .metric:nth-child(even) { border-right: 0; }
+}
+.footer .brand { color: var(--yellow); }
+.world-map-card.is-empty::after { border-radius: var(--r); }
