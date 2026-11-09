@@ -30,24 +30,88 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400..700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./assets/site.css" /><link rel="stylesheet" href="./assets/enhance.css" />
     <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "BreadcrumbList",
-        "itemListElement": [
-          {
-            "@type": "ListItem",
-            "position": 1,
-            "name": "Accueil",
-            "item": "https://www.econakl.com/"
-          },
-          {
-            "@type": "ListItem",
-            "position": 2,
-            "name": "Contact",
-            "item": "https://www.econakl.com/contact.html"
-          }
-        ]
-      }
+      [
+        {
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Accueil",
+              "item": "https://www.econakl.com/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Contact",
+              "item": "https://www.econakl.com/contact.html"
+            }
+          ]
+        },
+        {
+          "@context": "https://schema.org",
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Quelles informations faut-il pour obtenir un devis ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Le minimum : ce que vous transportez, longueur × largeur × hauteur, poids, lieu d’enlèvement, lieu de livraison et date souhaitée. Des photos, un plan ou une fiche technique nous font gagner du temps. Si vous ne connaissez pas une valeur, indiquez « à confirmer » : nous vous aiderons à la préciser."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "À partir de quand un transport est-il « exceptionnel » au Maroc ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Dès que le convoi chargé dépasse l’une des limites du code de la route : 2,55 m de large, 4 m de haut, 16,50 m de long pour un véhicule articulé ou 40 t de poids total roulant. Il faut alors une autorisation, un itinéraire défini et parfois une escorte. Vérifiez votre gabarit."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Avez-vous vos propres camions ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui. Nous transportons avec nos propres camions et porte-chars, conduits par nos chauffeurs. Le matériel est choisi selon les dimensions et le poids de votre colis."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Qui s’occupe des autorisations et de l’escorte ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nous vous accompagnons pour les autorisations de transport exceptionnel et prévoyons l’escorte quand l’itinéraire l’exige. Ce qui est inclus est précisé dans le devis."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Pouvez-vous enlever un colis au port ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oui : nous enlevons votre colis à Tanger Med, Casablanca ou dans un autre port marocain et le livrons sur site. Pour le dédouanement, nous travaillons en lien avec votre transitaire."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Où intervenez-vous ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Partout au Maroc : d’une ville à l’autre, des ports vers les usines et les chantiers, jusqu’aux sites isolés du Sud."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Quand aurai-je un prix ?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pour un convoi exceptionnel, le prix définitif dépend souvent de l’étude d’itinéraire et des autorisations. Dans notre première réponse, nous vous disons ce qui reste à vérifier."
+              }
+            }
+          ]
+        }
+      ]
     </script>
   </head>
   <body>
@@ -62,6 +126,7 @@
               <a href="./">Accueil</a>
               <a href="./services.html">Services</a>
               <a href="./network.html">Couverture</a>
+              <a href="./guide.html">Guide</a>
               <a href="./tracking.html">Suivi</a>
               <a href="./company.html">Société</a>
               <a class="nav-cta" href="./contact.html#devis">Demander un devis</a>
@@ -167,7 +232,7 @@
               <label class="check"><input type="checkbox" name="consentement" value="oui" required /> J’accepte qu’Econakl utilise ces informations pour répondre à ma demande. Elles ne sont ni revendues ni utilisées à d’autres fins (loi 09-08). *</label>
 
               <p class="form-status" data-form-status role="status" aria-live="polite"></p>
-              <button class="btn btn-primary" type="submit">Préparer l’e-mail de demande</button>
+              <div class="actions"><button class="btn btn-primary" type="submit">Préparer l’e-mail de demande</button><button class="btn btn-link" type="button" data-copy-quote>Copier la demande</button></div>
               <p class="form-note">Vous préférez écrire directement ? <a href="mailto:contact@econakl.com">contact@econakl.com</a></p>
             </form>
           </div>
@@ -182,7 +247,7 @@
               <details><summary>Quelles informations faut-il pour obtenir un devis ?</summary>
                 <p>Le minimum : ce que vous transportez, longueur × largeur × hauteur, poids, lieu d’enlèvement, lieu de livraison et date souhaitée. Des photos, un plan ou une fiche technique nous font gagner du temps. Si vous ne connaissez pas une valeur, indiquez « à confirmer » : nous vous aiderons à la préciser.</p></details>
               <details><summary>À partir de quand un transport est-il « exceptionnel » au Maroc ?</summary>
-                <p>Dès que le chargement dépasse les gabarits ou les poids autorisés sur la route. Il faut alors une autorisation, un itinéraire défini et parfois une escorte. Nous vérifions votre cas précis à partir des dimensions réelles, chargement compris.</p></details>
+                <p>Dès que le convoi chargé dépasse l’une des limites du code de la route : 2,55 m de large, 4 m de haut, 16,50 m de long pour un véhicule articulé ou 40 t de poids total roulant. Il faut alors une autorisation, un itinéraire défini et parfois une escorte. <a href="./guide.html#verifier">Vérifiez votre gabarit</a>.</p></details>
               <details><summary>Avez-vous vos propres camions ?</summary>
                 <p>Oui. Nous transportons avec nos propres camions et porte-chars, conduits par nos chauffeurs. Le matériel est choisi selon les dimensions et le poids de votre colis.</p></details>
               <details><summary>Qui s’occupe des autorisations et de l’escorte ?</summary>
@@ -205,13 +270,14 @@
           <a class="brand" href="./"><span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span><span class="brand-text">ECONAKL <small>TRANSPORT</small><span class="sr-only">, accueil</span></span></a>
           <p>Transporteur basé à Casablanca : transport lourd et convoi exceptionnel partout au Maroc, avec nos propres camions.</p>
         </div>
-        <div><h2 class="footer-title">Services</h2><ul><li><a href="./services.html#transport-lourd">Transport lourd et convoi exceptionnel</a></li><li><a href="./services.html#energie">Matériel d’énergie</a></li><li><a href="./services.html#port">Enlèvement au port</a></li><li><a href="./tracking.html">Suivi des transports</a></li></ul></div>
+        <div><h2 class="footer-title">Services</h2><ul><li><a href="./convoi-exceptionnel.html">Convoi exceptionnel</a></li><li><a href="./transport-engins.html">Transport d’engins</a></li><li><a href="./services.html#energie">Matériel d’énergie</a></li><li><a href="./services.html#port">Enlèvement au port</a></li><li><a href="./tracking.html">Suivi des transports</a></li></ul></div>
         <div><h2 class="footer-title">Couverture</h2><ul><li><a href="./network.html#villes">Villes desservies</a></li><li><a href="./network.html#trajets">Principaux trajets</a></li><li><a href="./network.html#transitaires">Transitaires</a></li></ul></div>
-        <div><h2 class="footer-title">Société</h2><ul><li><a href="./company.html">Qui sommes-nous</a></li><li><a href="./contact.html#devis">Demander un devis</a></li><li><a href="./legal.html">Mentions légales</a></li></ul></div>
+        <div><h2 class="footer-title">Société</h2><ul><li><a href="./company.html">Qui sommes-nous</a></li><li><a href="./guide.html">Guide de préparation</a></li><li><a href="./remorques.html">Choisir sa remorque</a></li><li><a href="./contact.html#devis">Demander un devis</a></li><li><a href="./legal.html">Mentions légales</a></li></ul></div>
         <div><h2 class="footer-title">Contact</h2><ul><li>Casablanca, Maroc</li><li><a href="mailto:contact@econakl.com">contact@econakl.com</a></li></ul></div>
       </div>
       <div class="container footer-bottom">© 2026 Econakl. Tous droits réservés.</div>
     </footer>
+    <script src="./assets/tools.js"></script>
     <script src="./assets/site.js"></script>
   </body>
 </html>

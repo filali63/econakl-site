@@ -309,6 +309,20 @@
     return `Econakl — ${parts.join(" — ")}`;
   };
 
+  // Secours si aucune messagerie ne s'ouvre : copier la demande dans le presse-papiers
+  const copyBtn = form.querySelector("[data-copy-quote]");
+  if (copyBtn && navigator.clipboard) {
+    copyBtn.addEventListener("click", () => {
+      const text = `${buildSubject()}\n\n${buildBody()}`;
+      navigator.clipboard.writeText(text).then(
+        () => showStatus(isEnglish ? `Request copied. Paste it into an email to ${MAIL_TO}.` : `Demande copiée. Collez-la dans un e-mail adressé à ${MAIL_TO}.`, false),
+        () => showStatus(isEnglish ? `Copy failed. Write to ${MAIL_TO}.` : `La copie a échoué. Écrivez à ${MAIL_TO}.`, true)
+      );
+    });
+  } else if (copyBtn) {
+    copyBtn.hidden = true;
+  }
+
   form.addEventListener("submit", (event) => {
     event.preventDefault();
 
