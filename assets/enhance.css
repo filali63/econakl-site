@@ -1,120 +1,122 @@
-/* ECONAKL — couche d'amélioration du design d'origine (vert / jaune).
-   Chargée après site.css : corrige la mise en page et ajoute les effets. */
+/* ECONAKL — design d'origine (vert / jaune), version « transporteur solide ».
+   Chargée après site.css : surfaces pleines, pas de verre ni de dégradé, pas d'animation. */
 
-/* ---------- Navigation : logo lisible, barre plus nette ---------- */
-.nav-pill {
-  background: rgba(24, 52, 20, 0.9);
-  border-color: rgba(245, 197, 66, 0.22);
-  box-shadow: 0 18px 50px rgba(24, 52, 20, 0.18);
+:root {
+  --glass: #ffffff;
+  --glass-dark: #183414;
 }
-.nav-pill:hover, .nav-pill:focus-within {
-  background: linear-gradient(90deg, rgba(24, 52, 20, 0.96), rgba(35, 69, 29, 0.94));
+
+/* ---------- Plus aucune animation ni effet de survol qui « flotte » ---------- */
+*, *::before, *::after { animation: none !important; }
+.word-reveal span { opacity: 1 !important; transform: none !important; filter: none !important; }
+.service-card:hover, .panel:hover, .product-card:hover, .contact-card:hover,
+.timeline-step:hover, .office-card:hover, .city-card:hover, .world-map-card:hover,
+.route-highlight:hover, .customer-story-grid.stories-visible .customer-story:hover {
+  transform: none !important;
+}
+.service-card:hover img, .product-card:hover img, .hero-photo:hover img, .visual-tile:hover img { transform: none !important; }
+.service-card, .panel, .product-card, .city-card, .timeline-step { transition: border-color 200ms ease; }
+.service-card:hover, .panel:hover, .product-card:hover, .city-card:hover, .timeline-step:hover { border-color: var(--ink); box-shadow: 0 12px 34px rgba(24, 52, 20, 0.06); }
+* { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+
+/* ---------- Bandeau du haut : uni ---------- */
+.topbar { background: var(--ink); color: var(--yellow); font-weight: 700; }
+
+/* ---------- Navigation : barre pleine, logo lisible, sans élargissement animé ---------- */
+.navbar { background: var(--cream); border-bottom: 1px solid rgba(24, 52, 20, 0.1); }
+.nav-pill, .nav-pill:hover, .nav-pill:focus-within {
+  width: min(820px, calc(100vw - 420px)); padding-inline: 24px;
+  background: var(--ink); border-color: var(--ink); box-shadow: none; transition: none;
 }
 .brand { color: var(--yellow); text-shadow: none; }
+.brand-word { text-shadow: none; }
 .nav-links { font-weight: 650; }
-.nav-links a { color: #fff; opacity: 0.82; }
+.nav-links a { color: #fff; opacity: 0.85; }
 .nav-links a:hover, .nav-links a.active { opacity: 1; text-decoration-color: var(--yellow); text-decoration-thickness: 2px; }
-.navbar { transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), background 300ms ease, padding 300ms ease; }
-.navbar.is-hidden { transform: translateY(-110%); }
-.navbar.is-scrolled { padding: 8px 0; background: rgba(248, 248, 241, 0.86); }
 
-/* ---------- Barre de progression de lecture ---------- */
-.scroll-progress {
-  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 100;
-  background: linear-gradient(90deg, var(--lime), var(--yellow));
-  transform-origin: 0 50%; transform: scaleX(0); pointer-events: none;
-}
+/* ---------- Boutons pleins ---------- */
+.btn-primary, .btn-primary:hover { background: var(--yellow); box-shadow: none; transform: none; }
+.btn-primary:hover { background: #e9b82f; }
+.btn-light { box-shadow: none; }
 
 /* ---------- Typographie : titres maîtrisés ---------- */
 .hero h1 { font-size: clamp(3.1rem, 5.6vw, 6.3rem); line-height: 0.96; max-width: 720px; }
+.highlight { background: linear-gradient(transparent 60%, var(--yellow) 60%); }
 .section h2, .page-hero h1 { font-size: clamp(2.2rem, 3.8vw, 4.2rem); line-height: 1; max-width: 760px; letter-spacing: -0.045em; }
-.glass-panel h2 { font-size: clamp(2rem, 3.2vw, 3.5rem); }
+.glass-panel h2 { font-size: clamp(2rem, 3.2vw, 3.5rem); margin-bottom: 18px; }
 .section-header { grid-template-columns: minmax(0, 1fr) minmax(260px, 0.48fr); gap: 56px; margin-bottom: 48px; }
 .section-header p { font-size: 1.06rem; line-height: 1.6; }
 .section { padding: 104px 0; }
-.lead { line-height: 1.55; }
+.hero-card strong, .metric strong { text-shadow: none; }
 
 /* ---------- Hero ---------- */
 .hero { padding: 64px 0 96px; }
 .hero-grid { grid-template-columns: minmax(0, 0.95fr) minmax(440px, 1.05fr); gap: 64px; }
 .hero-photo { inset: 40px 0 40px 40px; }
-.hero-photo img { transform: scale(1.12); will-change: transform; }
-.hero-photo::after { background: linear-gradient(160deg, rgba(248, 248, 241, 0) 40%, rgba(24, 52, 20, 0.35)); }
-.hero-card { background: rgba(255, 255, 255, 0.82); }
-.floating-card { background: rgba(255, 255, 255, 0.86); top: 0; }
-.hero-card, .floating-card { will-change: transform; transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 400ms ease; }
+.hero-photo::after { display: none; }
+.glass-card { background: #fff; border: 1px solid rgba(24, 52, 20, 0.12); }
+.hero-card { border-left: 6px solid var(--yellow); }
+.floating-card { top: 0; }
 
-/* ---------- Bandeau défilant ---------- */
-.ticker { overflow: hidden; background: var(--ink); color: var(--cream); padding: 22px 0; border-block: 1px solid rgba(245, 197, 66, 0.2); }
-.ticker-track { display: flex; width: max-content; gap: 0; animation: ticker 48s linear infinite; }
-.ticker span { display: inline-flex; align-items: center; font-size: clamp(1.3rem, 2.2vw, 2rem); font-weight: 760; letter-spacing: -0.03em; white-space: nowrap; padding-right: 40px; }
-.ticker span::after { content: ""; width: 12px; height: 12px; margin-left: 40px; border-radius: 3px; background: var(--yellow); transform: rotate(45deg); }
-.ticker span:nth-child(3n)::after { background: var(--lime); }
-.ticker:hover .ticker-track { animation-play-state: paused; }
-@keyframes ticker { to { transform: translateX(-50%); } }
+/* ---------- Bloc « méthode » : panneau vert plein sur la photo ---------- */
+.glass-stage { min-height: 0; background: var(--ink); }
+.glass-stage > img { opacity: 1; }
+.glass-panel { background: var(--ink); border-color: var(--ink); box-shadow: none; min-height: 0; margin: clamp(22px, 4vw, 54px); max-width: 1000px; }
+.callout, .callout:first-child { background: rgba(255, 255, 255, 0.08); border-color: rgba(255, 255, 255, 0.2); }
+.callout:first-child { border-color: var(--yellow); }
 
-/* ---------- Bloc « méthode » : photo plus présente, panneau plus lisible ---------- */
-.glass-stage { min-height: 0; }
-.glass-stage > img { opacity: 0.9; transform: scale(1.15); will-change: transform; }
-.glass-panel { background: rgba(24, 52, 20, 0.74); min-height: 0; margin: clamp(22px, 4vw, 54px); }
-.callout { background: rgba(255, 255, 255, 0.1); }
-
-/* ---------- Cartes : effet lumière qui suit le curseur ---------- */
-.service-card, .panel, .city-card, .timeline-step, .metric { position: relative; }
-.service-card::after, .panel::after, .city-card::after {
-  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
-  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(245, 197, 66, 0.16), transparent 60%);
-  transition: opacity 300ms ease;
-}
-.service-card:hover::after, .panel:hover::after, .city-card:hover::after { opacity: 1; }
+/* ---------- Cartes et chiffres : à plat ---------- */
+.service-card, .panel, .product-card, .contact-card, .city-card, .timeline-step, .office-card, .metric, .route-table-wrap { background: #fff; box-shadow: none; }
+.metric:nth-child(even) { background: #f6eccb; }
 .service-card { min-height: 0; }
 .service-card img { height: 250px; }
 .service-body { padding: 24px 26px 30px; }
+.chip { background: #f6eccb; border-color: #e8d48f; }
 
-/* ---------- Scénarios sectoriels : moins hauts ---------- */
-.customer-story-grid.stories-visible .customer-story { min-height: 470px; }
-.customer-logo { height: 84px; width: min(200px, 70%); }
-.customer-logo.text-logo { color: var(--ink); font-size: clamp(1.3rem, 2.2vw, 2rem); }
+/* ---------- Scénarios sectoriels : photo + voile vert uni, toujours lisibles ---------- */
+.customer-story, .customer-story-grid.stories-visible .customer-story {
+  min-height: 420px; background: linear-gradient(rgba(24, 52, 20, 0.86), rgba(24, 52, 20, 0.86)), var(--story-image);
+  background-size: cover; background-position: center; box-shadow: none; border-color: transparent;
+}
+.customer-story::before { display: none; }
+.story-content, .story-content h3, .story-content p { visibility: visible !important; opacity: 1 !important; transform: none !important; }
+.customer-logo { height: 76px; width: min(190px, 70%); box-shadow: none; }
+.customer-logo.text-logo { color: var(--ink); font-size: clamp(1.25rem, 2vw, 1.8rem); }
 
-/* ---------- Carte du monde : texte corrigé ---------- */
-.world-map-card { min-height: 520px; }
-.world-map-card.is-empty::after { content: "Les corridors stratégiques sont conçus mission par mission."; }
+/* ---------- Bandeaux verts (« pourquoi », etc.) : voile uni sur la photo ---------- */
+.marketing-band { background: var(--ink); box-shadow: none; }
+.marketing-band::before { background-image: linear-gradient(rgba(24, 52, 20, 0.9), rgba(24, 52, 20, 0.9)), var(--band-image, none); }
+.marketing-band::after { display: none; }
+.marketing-band .timeline-step { background: rgba(255, 255, 255, 0.07); border-color: rgba(255, 255, 255, 0.18); }
+.marketing-band .timeline-step h3 { color: var(--cream); }
+.marketing-band .timeline-step p { color: rgba(248, 248, 241, 0.75); }
+.marketing-band .timeline-step:hover { border-color: var(--yellow); }
 
-/* ---------- Carte réseau ---------- */
-.product-card.featured { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); }
-.product-card img { min-width: 0; }
+/* ---------- Carte du monde : sans halo ---------- */
+.world-map-card { min-height: 520px; background: #fff; box-shadow: none; }
+.world-map-card.is-empty::after { content: "Chaque itinéraire est étudié mission par mission."; background: #fff; }
+.map-overlay { background: none; }
+.map-info, .map-card { background: #fff; border-left: 6px solid var(--yellow); box-shadow: none; }
 
 /* ---------- Photos ---------- */
 .visual-tile { min-height: 460px; }
-.visual-caption { background: rgba(255, 255, 255, 0.84); }
+.visual-caption { background: #fff; border-left: 6px solid var(--yellow); }
+.hero-photo, .glass-stage, .world-map-card, .visual-tile { box-shadow: none; }
+.product-card.featured { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); }
+.product-card img { min-width: 0; }
 
-/* ---------- Boutons ---------- */
-.btn { will-change: transform; }
-.btn-primary { transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms ease, background 300ms ease; }
-
-/* ---------- Apparitions au défilement (activées seulement si JS + animations autorisées) ---------- */
-.fx .rv { opacity: 0; transform: translateY(34px); transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1), transform 900ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: var(--d, 0ms); }
-.fx .rv.in { opacity: 1; transform: none; }
-.fx .rv-img { clip-path: inset(18% 0 0 0 round 34px); transform: scale(1.08); transition: clip-path 1200ms cubic-bezier(0.22, 1, 0.36, 1), transform 1400ms cubic-bezier(0.22, 1, 0.36, 1); }
-.fx .rv-img.in { clip-path: inset(0 0 0 0 round 0); transform: none; }
-.fx .rv-line { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; }
-.fx .rv-line > span { display: inline-block; transform: translateY(105%); transition: transform 1000ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: var(--d, 0ms); }
-.fx .in .rv-line > span, .fx .rv-line.in > span { transform: none; }
-
-/* Lenis */
-html.lenis, html.lenis body { height: auto; }
-.lenis.lenis-smooth { scroll-behavior: auto !important; }
-.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+/* ---------- Pages intérieures ---------- */
+.page-hero::before { background: rgba(248, 248, 241, 0.9); }
 
 /* ---------- Mobile ---------- */
 @media (max-width: 980px) {
   .hero-grid { grid-template-columns: 1fr; }
   .hero-photo { inset: 30px 0 70px; }
   .section-header { grid-template-columns: 1fr; gap: 18px; }
-  .customer-story-grid.stories-visible .customer-story { min-height: 0; }
+  .customer-story, .customer-story-grid.stories-visible .customer-story { min-height: 0; }
   .glass-panel { margin: 18px; grid-template-columns: 1fr; }
   .callout-grid { grid-column: 1; grid-row: auto; margin-top: 26px; }
-  .nav-pill { width: auto; }
+  .nav-pill, .nav-pill:hover, .nav-pill:focus-within { width: auto; padding-inline: 18px; }
 }
 @media (max-width: 640px) {
   .hero { padding: 36px 0 64px; }
@@ -125,14 +127,4 @@ html.lenis, html.lenis body { height: auto; }
   .service-card img { height: 200px; }
   .world-map-card { min-height: 440px; }
   .visual-tile { min-height: 380px; }
-  .ticker { padding: 16px 0; }
-  .ticker span { padding-right: 26px; }
-  .ticker span::after { margin-left: 26px; width: 9px; height: 9px; }
 }
-
-@media (prefers-reduced-motion: reduce) {
-  .ticker-track { animation: none; }
-  .hero-photo img, .glass-stage > img { transform: none; }
-  .navbar.is-hidden { transform: none; }
-}
-.glass-panel h2 { margin-bottom: 18px; }
