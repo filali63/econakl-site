@@ -1,0 +1,138 @@
+/* ECONAKL — couche d'amélioration du design d'origine (vert / jaune).
+   Chargée après site.css : corrige la mise en page et ajoute les effets. */
+
+/* ---------- Navigation : logo lisible, barre plus nette ---------- */
+.nav-pill {
+  background: rgba(24, 52, 20, 0.9);
+  border-color: rgba(245, 197, 66, 0.22);
+  box-shadow: 0 18px 50px rgba(24, 52, 20, 0.18);
+}
+.nav-pill:hover, .nav-pill:focus-within {
+  background: linear-gradient(90deg, rgba(24, 52, 20, 0.96), rgba(35, 69, 29, 0.94));
+}
+.brand { color: var(--yellow); text-shadow: none; }
+.nav-links { font-weight: 650; }
+.nav-links a { color: #fff; opacity: 0.82; }
+.nav-links a:hover, .nav-links a.active { opacity: 1; text-decoration-color: var(--yellow); text-decoration-thickness: 2px; }
+.navbar { transition: transform 420ms cubic-bezier(0.22, 1, 0.36, 1), background 300ms ease, padding 300ms ease; }
+.navbar.is-hidden { transform: translateY(-110%); }
+.navbar.is-scrolled { padding: 8px 0; background: rgba(248, 248, 241, 0.86); }
+
+/* ---------- Barre de progression de lecture ---------- */
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 100;
+  background: linear-gradient(90deg, var(--lime), var(--yellow));
+  transform-origin: 0 50%; transform: scaleX(0); pointer-events: none;
+}
+
+/* ---------- Typographie : titres maîtrisés ---------- */
+.hero h1 { font-size: clamp(3.1rem, 5.6vw, 6.3rem); line-height: 0.96; max-width: 720px; }
+.section h2, .page-hero h1 { font-size: clamp(2.2rem, 3.8vw, 4.2rem); line-height: 1; max-width: 760px; letter-spacing: -0.045em; }
+.glass-panel h2 { font-size: clamp(2rem, 3.2vw, 3.5rem); }
+.section-header { grid-template-columns: minmax(0, 1fr) minmax(260px, 0.48fr); gap: 56px; margin-bottom: 48px; }
+.section-header p { font-size: 1.06rem; line-height: 1.6; }
+.section { padding: 104px 0; }
+.lead { line-height: 1.55; }
+
+/* ---------- Hero ---------- */
+.hero { padding: 64px 0 96px; }
+.hero-grid { grid-template-columns: minmax(0, 0.95fr) minmax(440px, 1.05fr); gap: 64px; }
+.hero-photo { inset: 40px 0 40px 40px; }
+.hero-photo img { transform: scale(1.12); will-change: transform; }
+.hero-photo::after { background: linear-gradient(160deg, rgba(248, 248, 241, 0) 40%, rgba(24, 52, 20, 0.35)); }
+.hero-card { background: rgba(255, 255, 255, 0.82); }
+.floating-card { background: rgba(255, 255, 255, 0.86); top: 0; }
+.hero-card, .floating-card { will-change: transform; transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 400ms ease; }
+
+/* ---------- Bandeau défilant ---------- */
+.ticker { overflow: hidden; background: var(--ink); color: var(--cream); padding: 22px 0; border-block: 1px solid rgba(245, 197, 66, 0.2); }
+.ticker-track { display: flex; width: max-content; gap: 0; animation: ticker 48s linear infinite; }
+.ticker span { display: inline-flex; align-items: center; font-size: clamp(1.3rem, 2.2vw, 2rem); font-weight: 760; letter-spacing: -0.03em; white-space: nowrap; padding-right: 40px; }
+.ticker span::after { content: ""; width: 12px; height: 12px; margin-left: 40px; border-radius: 3px; background: var(--yellow); transform: rotate(45deg); }
+.ticker span:nth-child(3n)::after { background: var(--lime); }
+.ticker:hover .ticker-track { animation-play-state: paused; }
+@keyframes ticker { to { transform: translateX(-50%); } }
+
+/* ---------- Bloc « méthode » : photo plus présente, panneau plus lisible ---------- */
+.glass-stage { min-height: 0; }
+.glass-stage > img { opacity: 0.9; transform: scale(1.15); will-change: transform; }
+.glass-panel { background: rgba(24, 52, 20, 0.74); min-height: 0; margin: clamp(22px, 4vw, 54px); }
+.callout { background: rgba(255, 255, 255, 0.1); }
+
+/* ---------- Cartes : effet lumière qui suit le curseur ---------- */
+.service-card, .panel, .city-card, .timeline-step, .metric { position: relative; }
+.service-card::after, .panel::after, .city-card::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none; opacity: 0;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(245, 197, 66, 0.16), transparent 60%);
+  transition: opacity 300ms ease;
+}
+.service-card:hover::after, .panel:hover::after, .city-card:hover::after { opacity: 1; }
+.service-card { min-height: 0; }
+.service-card img { height: 250px; }
+.service-body { padding: 24px 26px 30px; }
+
+/* ---------- Scénarios sectoriels : moins hauts ---------- */
+.customer-story-grid.stories-visible .customer-story { min-height: 470px; }
+.customer-logo { height: 84px; width: min(200px, 70%); }
+.customer-logo.text-logo { color: var(--ink); font-size: clamp(1.3rem, 2.2vw, 2rem); }
+
+/* ---------- Carte du monde : texte corrigé ---------- */
+.world-map-card { min-height: 520px; }
+.world-map-card.is-empty::after { content: "Les corridors stratégiques sont conçus mission par mission."; }
+
+/* ---------- Carte réseau ---------- */
+.product-card.featured { grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr); }
+.product-card img { min-width: 0; }
+
+/* ---------- Photos ---------- */
+.visual-tile { min-height: 460px; }
+.visual-caption { background: rgba(255, 255, 255, 0.84); }
+
+/* ---------- Boutons ---------- */
+.btn { will-change: transform; }
+.btn-primary { transition: transform 300ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 300ms ease, background 300ms ease; }
+
+/* ---------- Apparitions au défilement (activées seulement si JS + animations autorisées) ---------- */
+.fx .rv { opacity: 0; transform: translateY(34px); transition: opacity 900ms cubic-bezier(0.22, 1, 0.36, 1), transform 900ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: var(--d, 0ms); }
+.fx .rv.in { opacity: 1; transform: none; }
+.fx .rv-img { clip-path: inset(18% 0 0 0 round 34px); transform: scale(1.08); transition: clip-path 1200ms cubic-bezier(0.22, 1, 0.36, 1), transform 1400ms cubic-bezier(0.22, 1, 0.36, 1); }
+.fx .rv-img.in { clip-path: inset(0 0 0 0 round 0); transform: none; }
+.fx .rv-line { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: 0.08em; }
+.fx .rv-line > span { display: inline-block; transform: translateY(105%); transition: transform 1000ms cubic-bezier(0.22, 1, 0.36, 1); transition-delay: var(--d, 0ms); }
+.fx .in .rv-line > span, .fx .rv-line.in > span { transform: none; }
+
+/* Lenis */
+html.lenis, html.lenis body { height: auto; }
+.lenis.lenis-smooth { scroll-behavior: auto !important; }
+.lenis.lenis-smooth [data-lenis-prevent] { overscroll-behavior: contain; }
+
+/* ---------- Mobile ---------- */
+@media (max-width: 980px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-photo { inset: 30px 0 70px; }
+  .section-header { grid-template-columns: 1fr; gap: 18px; }
+  .customer-story-grid.stories-visible .customer-story { min-height: 0; }
+  .glass-panel { margin: 18px; grid-template-columns: 1fr; }
+  .callout-grid { grid-column: 1; grid-row: auto; margin-top: 26px; }
+  .nav-pill { width: auto; }
+}
+@media (max-width: 640px) {
+  .hero { padding: 36px 0 64px; }
+  .hero h1 { font-size: clamp(2.5rem, 11.5vw, 3.4rem); line-height: 1; }
+  .section h2, .page-hero h1 { font-size: clamp(1.95rem, 8.6vw, 2.6rem); line-height: 1.04; }
+  .glass-panel h2 { font-size: clamp(1.8rem, 8vw, 2.4rem); }
+  .section { padding: 68px 0; }
+  .service-card img { height: 200px; }
+  .world-map-card { min-height: 440px; }
+  .visual-tile { min-height: 380px; }
+  .ticker { padding: 16px 0; }
+  .ticker span { padding-right: 26px; }
+  .ticker span::after { margin-left: 26px; width: 9px; height: 9px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation: none; }
+  .hero-photo img, .glass-stage > img { transform: none; }
+  .navbar.is-hidden { transform: none; }
+}
+.glass-panel h2 { margin-bottom: 18px; }
