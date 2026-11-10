@@ -2676,6 +2676,80 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
   .city-card { padding: 20px 16px 18px; } .city-card h3 { font-size: 16px; }
 }
 @media print { .seal, .manifesto { display: none; } }
+
+/* ---------- 29. Lot 4 : dessins, storyboard, sommaire, engagements ---------- */
+.lt-fill { fill: var(--ink); }
+.lt-chain { fill: none; stroke: var(--yellow); stroke-width: 3; stroke-dasharray: 9 4; }
+.gb-dim-y { fill: none; stroke: var(--yellow); stroke-width: 2; }
+.mp-port { fill: none; stroke: var(--yellow); stroke-width: 2; }
+
+/* 29.1 Storyboard */
+.sb-grid, .ph-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.sb-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.sb svg, .ph svg { display: block; width: 100%; height: auto; background: #fff; border: 1.5px solid var(--ink); }
+.sb-l { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.sb-w { fill: #fff; stroke: var(--ink); stroke-width: 2; }
+.sb-y { fill: var(--yellow); stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; }
+.sb-d { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 10 8; }
+.sb-dim { fill: none; stroke: #b98f0f; stroke-width: 2; }
+.sb-k { fill: var(--ink); } .sb-c { fill: none; stroke: var(--yellow); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.sb-n { display: inline-block; margin: 16px 0 8px; padding: 3px 8px; background: var(--ink); color: var(--yellow); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; }
+.sb h3, .ph h3 { margin: 0 0 6px; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; }
+.sb p, .ph p { margin: 0; color: var(--body); font-size: 15px; line-height: 1.55; }
+
+/* 29.2 Portes d'entrée */
+.door-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--ink); }
+.door { position: relative; display: block; padding: 30px 60px 34px 0; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); color: var(--ink); text-decoration: none; }
+.door + .door { padding-left: 28px; }
+.door:last-child { border-right: 0; }
+.door h3 { margin: 0 0 8px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; }
+.door p { margin: 0; color: var(--body); line-height: 1.55; }
+.door span { position: absolute; right: 22px; top: 30px; display: grid; place-items: center; width: 34px; height: 34px; background: var(--yellow); color: var(--ink); font-weight: 700; }
+.door:hover h3 { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+.door:hover span { background: var(--ink); color: var(--yellow); }
+
+/* 29.3 Trois photos */
+.ph-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.ph svg { margin-bottom: 18px; background: var(--ink); border-color: var(--ink); }
+.ph-v { fill: none; stroke: var(--yellow); stroke-width: 3; }
+.ph-s { fill: none; stroke: #fff; stroke-width: 2; }
+.ph-l { fill: none; stroke: rgba(255, 255, 255, 0.6); stroke-width: 1.5; }
+
+/* 29.4 Ce que nous ne promettons pas */
+.np-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; border-top: 2px solid var(--ink); }
+.np-list li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--border); }
+.np-x { position: relative; width: 34px; height: 34px; border: 2px solid var(--ink); }
+.np-x::before, .np-x::after { content: ""; position: absolute; left: 50%; top: 50%; width: 30px; height: 2px; margin: -1px 0 0 -15px; background: var(--ink); transform: rotate(45deg); }
+.np-x::after { transform: rotate(-45deg); }
+.np-list h3 { margin: 0 0 6px; font-size: 21px; font-weight: 600; letter-spacing: -0.03em; }
+.np-list p { margin: 0; color: var(--body); line-height: 1.6; }
+
+/* 29.5 Sommaire de page */
+.toc { background: var(--ink); border-top: 1px solid rgba(255, 255, 255, 0.14); }
+.toc .container { display: flex; align-items: baseline; gap: 26px; padding-top: 16px; padding-bottom: 16px; }
+.toc span { flex: none; color: var(--yellow); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 26px; counter-reset: toc; }
+.toc a { color: #e4e7e6; font-size: 14px; text-decoration: none; }
+.toc a:hover { color: var(--yellow); text-decoration: underline; }
+.page-hero + .toc { margin-top: 0; }
+
+/* 29.6 Haut de page */
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+.footer-bottom .to-top { text-decoration: none; font-weight: 600; }
+.footer-bottom .to-top:hover { color: var(--yellow); }
+
+@media (max-width: 980px) {
+  .sb-grid { grid-template-columns: 1fr 1fr; }
+  .door-grid, .np-list { grid-template-columns: 1fr; }
+  .door, .door + .door { padding-left: 0; border-right: 0; }
+  .ph-grid { grid-template-columns: 1fr; }
+  .ph { display: grid; grid-template-columns: 150px minmax(0, 1fr); column-gap: 18px; align-items: start; }
+  .ph svg { grid-row: 1 / span 2; margin: 0; }
+  .ph h3 { align-self: end; }
+  .toc .container { flex-direction: column; gap: 8px; }
+}
+@media (max-width: 520px) { .sb-grid { grid-template-columns: 1fr; } .sb { display: grid; grid-template-columns: 130px minmax(0, 1fr); column-gap: 16px; } .sb svg { grid-row: 1 / span 3; } .sb-n { margin: 0 0 6px; justify-self: start; } .ph { grid-template-columns: 110px minmax(0, 1fr); } }
+@media print { .toc { display: none; } }
 </style>
     <script type="application/ld+json">
       {
@@ -2725,6 +2799,7 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
 
       <main id="contenu" tabindex="-1">
         <section class="page-hero"><img class="page-bg" src="https://images.unsplash.com/photo-1777181922137-53d605b2cec1?q=75&w=1600&auto=format&fit=crop" srcset="https://images.unsplash.com/photo-1777181922137-53d605b2cec1?q=70&w=800&auto=format&fit=crop 800w, https://images.unsplash.com/photo-1777181922137-53d605b2cec1?q=75&w=1400&auto=format&fit=crop 1400w, https://images.unsplash.com/photo-1777181922137-53d605b2cec1?q=75&w=2000&auto=format&fit=crop 2000w" sizes="100vw" alt="" width="2070" height="1380" decoding="async" loading="eager" fetchpriority="high" /><div class="container"><span class="eyebrow">Guide</span><h1>Préparer votre transport, étape par étape.</h1><p>Vérifiez votre gabarit, mesurez votre colis et réunissez les bonnes informations. Une demande bien préparée, c’est un devis plus rapide et un convoi sans surprise.</p></div></section>
+        <nav class="toc x-noprint" aria-label="Dans cette page"><div class="container"><span>Dans cette page</span><ol><li><a href="#verifier">Vérification</a></li><li><a href="#mesurer">Mesurer</a></li><li><a href="#reperes">Au-delà des quatre mesures</a></li><li><a href="#check-list">Check-list</a></li><li><a href="#delais">Délais</a></li><li><a href="#lexique">Lexique</a></li></ol></div></nav>
         <section class="section" id="verifier">
           <div class="container">
             <div class="section-header"><div><span class="kicker">Vérification</span><h2>Votre transport est-il exceptionnel ?</h2></div><p>Entrez les mesures de votre colis. Le résultat est indicatif : nous le confirmons à l’étude, une fois le colis posé sur la remorque.</p></div>
@@ -2740,6 +2815,15 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
           <div class="container">
             <div class="section-header"><div><span class="kicker">Mesurer</span><h2>Quatre mesures, prises au bon endroit.</h2></div><p>Une erreur de dix centimètres peut changer la remorque ou l’itinéraire. Mesurez le colis prêt à partir, emballage et supports compris.</p></div>
             <div class="grid grid-4"><article class="panel"><span class="chip">Longueur</span><h3>Hors tout</h3><p>Mesurez d’une extrémité à l’autre, pièces saillantes comprises : brides, anneaux, supports.</p></article><article class="panel"><span class="chip">Largeur</span><h3>Au point le plus large</h3><p>C’est la mesure qui déclenche le plus souvent une autorisation et un balisage.</p></article><article class="panel"><span class="chip">Hauteur</span><h3>Du sol au sommet</h3><p>Indiquez la hauteur du colis seul. Nous y ajoutons la hauteur du plateau de la remorque.</p></article><article class="panel"><span class="chip">Poids</span><h3>Réel, pas estimé</h3><p>Reprenez la plaque constructeur ou le bon de pesée. Précisez les points de levage et le centre de gravité s’ils sont connus.</p></article></div>
+          </div>
+        </section>
+        <section class="section dark gabarit" id="reperes">
+          <div class="container">
+            <div class="section-header"><div><span class="kicker">Au-delà des quatre mesures</span><h2>Trois repères que seul l’expéditeur connaît.</h2></div><p>Ils figurent sur le plan de colisage ou sur la notice du constructeur. Joignez-les à votre demande.</p></div>
+            <div class="gabarit-layout">
+              <figure class="gabarit-figure"><svg class="gabarit-svg" viewBox="0 0 1120 400" role="img" aria-label="Colis avec ses points de levage, son centre de gravité et ses points d’appui"><path class="gb-ground" d="M40 342 H1080"/><path class="gb-l" d="M330 122 L560 34 L790 122 M560 34 V10"/><rect class="gb-load" x="250" y="134" width="620" height="186"/><path class="gb-load-t" d="M250 196 H870 M405 134 V320 M715 134 V320"/><circle class="gb-l lt-fill" cx="330" cy="128" r="13"/><circle class="gb-l lt-fill" cx="790" cy="128" r="13"/><rect class="gb-l lt-fill" x="300" y="320" width="70" height="22"/><rect class="gb-l lt-fill" x="750" y="320" width="70" height="22"/><circle class="gb-l lt-fill" cx="650" cy="250" r="26"/><path class="gb-board" d="M650 250 V224 A26 26 0 0 1 676 250 Z M650 250 V276 A26 26 0 0 1 624 250 Z"/><path class="gb-dim-y" d="M560 368 H650 M560 360 v16 M650 360 v16 M560 320 V356"/><g class="gb-mark"><rect x="231" y="65" width="38" height="38"/><text x="250" y="92" text-anchor="middle">A</text></g><g class="gb-mark"><rect x="707" y="231" width="38" height="38"/><text x="726" y="258" text-anchor="middle">B</text></g><g class="gb-mark"><rect x="889" y="312" width="38" height="38"/><text x="908" y="339" text-anchor="middle">C</text></g></svg><figcaption>Schéma de principe, sans échelle.</figcaption></figure>
+              <div><ol class="gabarit-list"><li><span class="gb-key" aria-hidden="true">A</span><div><h3>Points de levage</h3><p>Là où accrocher les élingues. Indiquez-les sur un plan ou sur une photo.</p></div></li><li><span class="gb-key" aria-hidden="true">B</span><div><h3>Centre de gravité</h3><p>Il est rarement au milieu. S’il est décentré ou haut, il décide du calage et de la remorque.</p></div></li><li><span class="gb-key" aria-hidden="true">C</span><div><h3>Points d’appui</h3><p>Les zones où le colis peut reposer sans se déformer.</p></div></li></ol></div>
+            </div>
           </div>
         </section>
         <section class="section x-print" id="check-list">
@@ -2786,7 +2870,7 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
         <div><h2 class="footer-title">Société</h2><ul><li><a href="./company.html">Qui sommes-nous</a></li><li><a href="./guide.html">Guide de préparation</a></li><li><a href="./remorques.html">Choisir sa remorque</a></li><li><a href="./contact.html#devis">Demander un devis</a></li><li><a href="./legal.html">Mentions légales</a></li><li><a href="https://econaklequipement.com/">Econakl Équipement : location de matériel</a></li></ul></div>
         <div><h2 class="footer-title">Contact</h2><ul><li>Casablanca, Maroc</li><li><a href="mailto:contact@econakl.com">contact@econakl.com</a></li></ul></div>
       </div>
-      <div class="container footer-bottom">© 2026 Econakl. Tous droits réservés.</div>
+      <div class="container footer-bottom"><span>© 2026 Econakl. Tous droits réservés.</span><a class="to-top" href="#contenu">Haut de page ↑</a></div>
       <div class="footer-mark" aria-hidden="true">ECONAKL</div>
     </footer>
     <nav class="contact-bar" aria-label="Contact rapide"><a class="is-primary" href="./contact.html#devis">Demander un devis</a><a href="mailto:contact@econakl.com">Écrire un e-mail</a></nav>

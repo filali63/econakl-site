@@ -2676,6 +2676,80 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
   .city-card { padding: 20px 16px 18px; } .city-card h3 { font-size: 16px; }
 }
 @media print { .seal, .manifesto { display: none; } }
+
+/* ---------- 29. Lot 4 : dessins, storyboard, sommaire, engagements ---------- */
+.lt-fill { fill: var(--ink); }
+.lt-chain { fill: none; stroke: var(--yellow); stroke-width: 3; stroke-dasharray: 9 4; }
+.gb-dim-y { fill: none; stroke: var(--yellow); stroke-width: 2; }
+.mp-port { fill: none; stroke: var(--yellow); stroke-width: 2; }
+
+/* 29.1 Storyboard */
+.sb-grid, .ph-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 20px; }
+.sb-grid { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.sb svg, .ph svg { display: block; width: 100%; height: auto; background: #fff; border: 1.5px solid var(--ink); }
+.sb-l { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.sb-w { fill: #fff; stroke: var(--ink); stroke-width: 2; }
+.sb-y { fill: var(--yellow); stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; }
+.sb-d { fill: none; stroke: var(--ink); stroke-width: 1.5; stroke-dasharray: 10 8; }
+.sb-dim { fill: none; stroke: #b98f0f; stroke-width: 2; }
+.sb-k { fill: var(--ink); } .sb-c { fill: none; stroke: var(--yellow); stroke-width: 3.5; stroke-linecap: round; stroke-linejoin: round; }
+.sb-n { display: inline-block; margin: 16px 0 8px; padding: 3px 8px; background: var(--ink); color: var(--yellow); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; }
+.sb h3, .ph h3 { margin: 0 0 6px; font-size: 19px; font-weight: 600; letter-spacing: -0.02em; }
+.sb p, .ph p { margin: 0; color: var(--body); font-size: 15px; line-height: 1.55; }
+
+/* 29.2 Portes d'entrée */
+.door-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--ink); }
+.door { position: relative; display: block; padding: 30px 60px 34px 0; border-bottom: 1px solid var(--border); border-right: 1px solid var(--border); color: var(--ink); text-decoration: none; }
+.door + .door { padding-left: 28px; }
+.door:last-child { border-right: 0; }
+.door h3 { margin: 0 0 8px; font-size: 22px; font-weight: 600; letter-spacing: -0.03em; }
+.door p { margin: 0; color: var(--body); line-height: 1.55; }
+.door span { position: absolute; right: 22px; top: 30px; display: grid; place-items: center; width: 34px; height: 34px; background: var(--yellow); color: var(--ink); font-weight: 700; }
+.door:hover h3 { text-decoration: underline; text-decoration-color: var(--yellow); text-decoration-thickness: 3px; text-underline-offset: 5px; }
+.door:hover span { background: var(--ink); color: var(--yellow); }
+
+/* 29.3 Trois photos */
+.ph-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 28px; }
+.ph svg { margin-bottom: 18px; background: var(--ink); border-color: var(--ink); }
+.ph-v { fill: none; stroke: var(--yellow); stroke-width: 3; }
+.ph-s { fill: none; stroke: #fff; stroke-width: 2; }
+.ph-l { fill: none; stroke: rgba(255, 255, 255, 0.6); stroke-width: 1.5; }
+
+/* 29.4 Ce que nous ne promettons pas */
+.np-list { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: 1fr 1fr; column-gap: 56px; border-top: 2px solid var(--ink); }
+.np-list li { display: grid; grid-template-columns: 34px minmax(0, 1fr); gap: 20px; padding: 28px 0; border-bottom: 1px solid var(--border); }
+.np-x { position: relative; width: 34px; height: 34px; border: 2px solid var(--ink); }
+.np-x::before, .np-x::after { content: ""; position: absolute; left: 50%; top: 50%; width: 30px; height: 2px; margin: -1px 0 0 -15px; background: var(--ink); transform: rotate(45deg); }
+.np-x::after { transform: rotate(-45deg); }
+.np-list h3 { margin: 0 0 6px; font-size: 21px; font-weight: 600; letter-spacing: -0.03em; }
+.np-list p { margin: 0; color: var(--body); line-height: 1.6; }
+
+/* 29.5 Sommaire de page */
+.toc { background: var(--ink); border-top: 1px solid rgba(255, 255, 255, 0.14); }
+.toc .container { display: flex; align-items: baseline; gap: 26px; padding-top: 16px; padding-bottom: 16px; }
+.toc span { flex: none; color: var(--yellow); font-size: 11px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px 26px; counter-reset: toc; }
+.toc a { color: #e4e7e6; font-size: 14px; text-decoration: none; }
+.toc a:hover { color: var(--yellow); text-decoration: underline; }
+.page-hero + .toc { margin-top: 0; }
+
+/* 29.6 Haut de page */
+.footer-bottom { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; }
+.footer-bottom .to-top { text-decoration: none; font-weight: 600; }
+.footer-bottom .to-top:hover { color: var(--yellow); }
+
+@media (max-width: 980px) {
+  .sb-grid { grid-template-columns: 1fr 1fr; }
+  .door-grid, .np-list { grid-template-columns: 1fr; }
+  .door, .door + .door { padding-left: 0; border-right: 0; }
+  .ph-grid { grid-template-columns: 1fr; }
+  .ph { display: grid; grid-template-columns: 150px minmax(0, 1fr); column-gap: 18px; align-items: start; }
+  .ph svg { grid-row: 1 / span 2; margin: 0; }
+  .ph h3 { align-self: end; }
+  .toc .container { flex-direction: column; gap: 8px; }
+}
+@media (max-width: 520px) { .sb-grid { grid-template-columns: 1fr; } .sb { display: grid; grid-template-columns: 130px minmax(0, 1fr); column-gap: 16px; } .sb svg { grid-row: 1 / span 3; } .sb-n { margin: 0 0 6px; justify-self: start; } .ph { grid-template-columns: 110px minmax(0, 1fr); } }
+@media print { .toc { display: none; } }
 </style>
     <script type="application/ld+json">
       {
@@ -2729,6 +2803,12 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
           <div class="container grid grid-2">
             <div><span class="kicker">À propos</span><h2>Préparer, transporter, livrer, rendre compte.</h2></div>
             <article class="panel"><p>Depuis Casablanca, nous organisons chaque transport en trois temps : la préparation avant le départ, le suivi pendant le trajet et un dossier complet après la livraison.</p><ul class="feature-list"><li>Transport lourd et convoi exceptionnel</li><li>Nos camions, nos porte-chars et nos chauffeurs</li><li>Enlèvements aux ports et livraisons sur chantier partout au Maroc</li><li>Un interlocuteur unique pour chaque transport</li></ul></article>
+          </div>
+        </section>
+        <section class="section" id="franchise">
+          <div class="container">
+            <div class="section-header"><div><span class="kicker">Parler franchement</span><h2>Ce que nous ne promettons pas.</h2></div><p>Quatre choses qu’un transporteur sérieux refuse de promettre.</p></div>
+            <ul class="np-list"><li><span class="np-x" aria-hidden="true"></span><div><h3>Un prix sans les mesures réelles</h3><p>Nous chiffrons sur le poids et les dimensions exacts, pas sur une estimation.</p></div></li><li><span class="np-x" aria-hidden="true"></span><div><h3>Une date avant l’étude du trajet</h3><p>La date dépend de l’itinéraire et de l’autorisation. Nous l’annonçons quand nous la tenons.</p></div></li><li><span class="np-x" aria-hidden="true"></span><div><h3>Un départ sans autorisation</h3><p>Un convoi exceptionnel ne prend pas la route sans les documents requis.</p></div></li><li><span class="np-x" aria-hidden="true"></span><div><h3>Un chargement qui ne correspond pas à la demande</h3><p>Si le colis présenté n’a pas les mesures annoncées, nous réétudions avant de charger.</p></div></li></ul>
           </div>
         </section>
         <section class="section dark manifesto">
@@ -2797,7 +2877,7 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
         <div><h2 class="footer-title">Société</h2><ul><li><a href="./company.html">Qui sommes-nous</a></li><li><a href="./guide.html">Guide de préparation</a></li><li><a href="./remorques.html">Choisir sa remorque</a></li><li><a href="./contact.html#devis">Demander un devis</a></li><li><a href="./legal.html">Mentions légales</a></li><li><a href="https://econaklequipement.com/">Econakl Équipement : location de matériel</a></li></ul></div>
         <div><h2 class="footer-title">Contact</h2><ul><li>Casablanca, Maroc</li><li><a href="mailto:contact@econakl.com">contact@econakl.com</a></li></ul></div>
       </div>
-      <div class="container footer-bottom">© 2026 Econakl. Tous droits réservés.</div>
+      <div class="container footer-bottom"><span>© 2026 Econakl. Tous droits réservés.</span><a class="to-top" href="#contenu">Haut de page ↑</a></div>
       <div class="footer-mark" aria-hidden="true">ECONAKL</div>
     </footer>
     <nav class="contact-bar" aria-label="Contact rapide"><a class="is-primary" href="./contact.html#devis">Demander un devis</a><a href="mailto:contact@econakl.com">Écrire un e-mail</a></nav>

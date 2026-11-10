@@ -28,7 +28,7 @@
         { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'sha256-mFf3XMxpV8oVSuwGP2v1Y0rn2tjpiST4FB2i0QqK+VI=' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://upload.wikimedia.org; connect-src 'self'; manifest-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'sha256-4aO6Cs8/4HZOePGS380W8P0Monj9SU3n8gkW2AZvbPk=' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://upload.wikimedia.org; connect-src 'self'; manifest-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
         }
       ]
     },
