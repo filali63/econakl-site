@@ -828,3 +828,106 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
   .bl-wrap { padding: 0 12px 12px 0; } .bl-wrap::before { inset: 12px 0 0 12px; }
 }
 @media print { .footer-convoy { display: none; } }
+
+/* ---------- 28. Détails d'atelier : sceau, panneaux, tableau, papier quadrillé, plaques ---------- */
+/* 28.1 Sceau « Nos camions, nos chauffeurs » */
+.seal { position: absolute; right: 4%; bottom: 138px; z-index: 2; width: 168px; transform: rotate(-11deg); pointer-events: none; }
+.seal svg { display: block; width: 100%; height: auto; }
+.seal-bg { fill: var(--yellow); }
+.seal-r { fill: none; stroke: var(--ink); stroke-width: 1.6; }
+.seal-t { fill: var(--ink); font-size: 15px; font-weight: 700; letter-spacing: 0.06em; }
+.seal-m rect { fill: var(--ink); }
+
+/* 28.2 Panneaux d'obstacles */
+.sg-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0; border-top: 2px solid var(--ink); }
+.sg-card { padding: 34px 28px 30px 0; border-right: 1px solid var(--border); }
+.sg-card + .sg-card { padding-left: 28px; }
+.sg-card:last-child { border-right: 0; }
+.sg { display: block; width: 96px; height: 96px; margin-bottom: 24px; }
+.sg-ring { fill: #fff; stroke: var(--ink); stroke-width: 11; }
+.sg-tri { fill: var(--yellow); stroke: var(--ink); stroke-width: 8; stroke-linejoin: round; }
+.sg-f { fill: var(--ink); }
+.sg-l { fill: none; stroke: var(--ink); stroke-width: 4; stroke-linecap: square; }
+.sg-thick { stroke-width: 9; }
+.sg-card h3 { margin: 0 0 8px; font-size: 21px; font-weight: 600; letter-spacing: -0.03em; }
+.sg-card p { color: var(--body); line-height: 1.6; }
+
+/* 28.3 Tableau des trajets façon tableau des départs */
+.route-table-wrap { background: var(--ink); border-color: var(--ink); padding: 8px; }
+.route-table { border: 2px solid #fff; }
+.route-table th { background: var(--ink); color: var(--yellow); border-bottom: 2px solid #fff; }
+.route-table td, .route-table tr:nth-child(even) td { background: var(--ink); color: #dfe3e2; border-bottom-color: rgba(255, 255, 255, 0.2); }
+.route-table td strong { color: #fff; }
+.route-table tbody tr:last-child td { border-bottom: 0; }
+.route-table td:first-child strong::before { content: "→"; margin-right: 12px; color: var(--yellow); }
+
+/* 28.4 Papier quadrillé derrière les dessins techniques + cartouche */
+.gabarit-figure, .trailer-figure, .map-figure {
+  background-image: linear-gradient(rgba(255, 255, 255, 0.055) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 255, 255, 0.055) 1px, transparent 1px);
+  background-size: 28px 28px; background-position: -1px -1px;
+}
+.cartouche { display: grid; grid-template-columns: 1.3fr 1.5fr 0.8fr 0.6fr; margin-top: 18px; border: 1px solid rgba(255, 255, 255, 0.45); background: var(--ink); }
+.cartouche div { padding: 9px 12px 10px; border-right: 1px solid rgba(255, 255, 255, 0.45); }
+.cartouche div:last-child { border-right: 0; }
+.cartouche span { display: block; color: var(--muted-on-dark); font-size: 10px; font-weight: 600; letter-spacing: 0.14em; text-transform: uppercase; }
+.cartouche b { display: block; margin-top: 3px; color: #fff; font-size: 13px; font-weight: 600; }
+.mp-north path { fill: var(--yellow); }
+.mp-north text { fill: #fff; font-size: 15px; font-weight: 700; }
+
+/* 28.5 Route barrée (404) */
+.barrier { display: block; width: min(420px, 78%); height: auto; margin-bottom: 40px; }
+.bz-y { fill: var(--yellow); } .bz-k { fill: var(--ink); }
+.bz-b { stroke: #fff; stroke-width: 2; }
+.bz-p { fill: none; stroke: #fff; stroke-width: 6; stroke-linecap: square; }
+
+/* 28.6 Phrase manifeste */
+.manifesto { padding: 120px 0; }
+.manifesto .container { border-left: 6px solid var(--yellow); padding-left: clamp(22px, 4vw, 60px); }
+.section.dark .manifesto-q { max-width: 1100px; margin: 0; color: #fff; font-size: clamp(38px, 6.2vw, 98px); font-weight: 550; line-height: 1.02; letter-spacing: -0.055em; }
+.manifesto-q em { font-style: normal; box-shadow: inset 0 -0.14em 0 var(--yellow); }
+.section.dark .manifesto-c { margin-top: 34px; color: var(--yellow); font-size: 12px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; }
+
+/* 28.7 Suivi : les quatre moments le long d'un itinéraire */
+.section > .container > .timeline { gap: 0; border-top: 2px solid var(--ink); }
+.section > .container > .timeline .timeline-step { border: 0; border-radius: 0; background: none; padding: 40px 26px 0 0; min-height: 0; }
+.section > .container > .timeline .timeline-step::before { content: ""; position: absolute; left: 0; top: -10px; width: 18px; height: 18px; border-radius: 50%; background: #fff; border: 4px solid var(--ink); box-sizing: border-box; }
+.section > .container > .timeline .timeline-step:last-child::before { background: var(--yellow); border-radius: 0; }
+.section > .container > .timeline .timeline-step strong { background: none; min-width: 0; width: auto; height: auto; padding: 0; margin-bottom: 14px; justify-content: flex-start; color: #676e72; font-size: 12px; letter-spacing: 0.13em; }
+
+/* 28.8 Villes en plaques d'entrée d'agglomération */
+.city-card { border: 2px solid var(--ink); outline: 1px solid var(--ink); outline-offset: -7px; padding: 26px 24px 24px; background: #fff; }
+.city-card h3 { text-transform: uppercase; letter-spacing: 0.02em; font-size: 20px; font-weight: 700; }
+
+/* 28.9 Colis coté sur la page Contact */
+.crate { display: block; width: min(300px, 100%); height: auto; margin: 0 0 22px; }
+.cr-l { fill: none; stroke: var(--ink); stroke-width: 2; stroke-linejoin: round; }
+.cr-thin { stroke-width: 1; }
+.cr-d { fill: none; stroke: #b98f0f; stroke-width: 1.5; }
+.cr-t { fill: var(--ink); font-size: 17px; font-weight: 700; font-style: italic; }
+.cr-tag { fill: var(--yellow); stroke: var(--ink); stroke-width: 1.5; }
+.cr-tt { fill: var(--ink); font-size: 14px; font-weight: 700; }
+
+@media (max-width: 980px) {
+  .seal { display: none; }
+  .sg-grid { grid-template-columns: 1fr 1fr; }
+  .sg-card:nth-child(2) { border-right: 0; }
+  .sg-card:nth-child(3) { padding-left: 0; }
+  .sg-card:nth-child(n+3) { border-top: 1px solid var(--border); }
+  .section > .container > .timeline { border-top: 0; border-left: 2px solid var(--ink); margin-left: 8px; }
+  .section > .container > .timeline .timeline-step { padding: 0 0 34px 30px; }
+  .section > .container > .timeline .timeline-step::before { left: -10px; top: 0; }
+  .manifesto { padding: 80px 0; }
+}
+@media (max-width: 640px) {
+  .sg-grid { grid-template-columns: 1fr; }
+  .sg-card, .sg-card + .sg-card { padding: 26px 0; border-right: 0; border-top: 1px solid var(--border); }
+  .sg-card:first-child { border-top: 0; }
+  .sg { width: 76px; height: 76px; margin-bottom: 16px; }
+  .route-table tr:nth-child(n), .route-table tr:nth-child(even) { background: var(--ink); border-bottom-color: rgba(255, 255, 255, 0.2); }
+  .route-table tr:nth-child(n) td { background: transparent; color: #dfe3e2; }
+  .cartouche { grid-template-columns: 1fr 1fr; }
+  .cartouche div:nth-child(2) { border-right: 0; }
+  .cartouche div:nth-child(n+3) { border-top: 1px solid rgba(255, 255, 255, 0.45); }
+  .city-card { padding: 20px 16px 18px; } .city-card h3 { font-size: 16px; }
+}
+@media print { .seal, .manifesto { display: none; } }
