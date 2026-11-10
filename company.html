@@ -2786,17 +2786,40 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
 .intro-word b { display: block; font-size: clamp(38px, 9vw, 64px); font-weight: 700; letter-spacing: -.04em; line-height: 1; animation: intro-up .6s .45s cubic-bezier(.2, .8, .2, 1) both; }
 .intro-word small { display: block; margin-top: 8px; color: var(--yellow); font-size: clamp(11px, 2.4vw, 15px); font-weight: 600; letter-spacing: .52em; animation: intro-up .6s .6s cubic-bezier(.2, .8, .2, 1) both; }
 @keyframes intro-up { from { opacity: 0; transform: translateY(100%); } to { opacity: 1; transform: none; } }
-.intro-road { position: relative; width: 100%; height: 22px; border-bottom: 2px solid rgba(255, 255, 255, .5); background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .35) 0 18px, transparent 18px 32px) 0 100% / 100% 2px no-repeat; background-position: 0 calc(100% - 7px); }
-.intro-truck { position: absolute; bottom: 2px; left: 0; width: 78px; height: 18px; background: var(--yellow); animation: intro-drive 1.5s .5s cubic-bezier(.45, 0, .2, 1) both; }
-.intro-truck::after { content: ""; position: absolute; right: -24px; bottom: 0; width: 20px; height: 14px; background: #fff; }
-@keyframes intro-drive { from { left: 0; } to { left: calc(100% - 102px); } }
+.intro-road { position: relative; width: 100%; height: 86px; overflow: hidden; border-bottom: 2px solid rgba(255, 255, 255, .55); -webkit-mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); mask-image: linear-gradient(90deg, transparent, #000 12%, #000 88%, transparent); }
+.ir-dash { position: absolute; left: 0; right: -64px; bottom: 6px; height: 2px; background: repeating-linear-gradient(90deg, rgba(255, 255, 255, .4) 0 20px, transparent 20px 32px); animation: ir-road .45s linear infinite; }
+@keyframes ir-road { to { transform: translateX(-32px); } }
+.intro-rig { position: absolute; bottom: 0; left: -230px; width: 210px; height: auto; overflow: visible; animation: ir-drive 2.5s .25s both; }
+@keyframes ir-drive {
+  0% { left: -230px; animation-timing-function: cubic-bezier(.15, .7, .3, 1); }
+  48% { left: calc(50% - 105px); animation-timing-function: linear; }
+  70% { left: calc(50% - 98px); animation-timing-function: cubic-bezier(.6, 0, .9, .4); }
+  100% { left: calc(100% + 40px); }
+}
+.ir-body { animation: ir-bob .32s ease-in-out infinite alternate; }
+@keyframes ir-bob { from { transform: translateY(0); } to { transform: translateY(-1.2px); } }
+.ir-l { fill: var(--ink); stroke: #fff; stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.ir-load { fill: var(--yellow); stroke: #fff; stroke-width: 1.6; }
+.ir-strap { fill: none; stroke: var(--ink); stroke-width: 2; }
+.ir-flag { fill: var(--yellow); }
+.ir-win { fill: rgba(255, 255, 255, .14); stroke: #fff; stroke-width: 1.2; }
+.ir-beacon { fill: var(--yellow); animation: ir-blink .5s steps(2, jump-none) infinite; }
+@keyframes ir-blink { 50% { fill: #fff; } }
+.iw { transform-box: fill-box; transform-origin: center; animation: ir-spin .38s linear infinite; }
+.iw-t { fill: var(--ink); stroke: #fff; stroke-width: 1.8; }
+.iw-h { fill: var(--yellow); }
+.iw-s { stroke: rgba(255, 255, 255, .7); stroke-width: 1.2; }
+@keyframes ir-spin { to { transform: rotate(360deg); } }
+.ir-smoke circle { fill: rgba(255, 255, 255, .28); transform-box: fill-box; transform-origin: center; animation: ir-puff 1s ease-out infinite; }
+.ir-smoke circle:nth-child(2) { animation-delay: .33s; } .ir-smoke circle:nth-child(3) { animation-delay: .66s; }
+@keyframes ir-puff { from { opacity: .9; transform: translate(0, 0) scale(.6); } to { opacity: 0; transform: translate(-16px, -10px) scale(1.6); } }
 .intro-tag { margin: 0; color: var(--muted-on-dark, #b8c0c1); font-size: 14px; letter-spacing: .04em; text-align: center; animation: intro-fade .6s .9s both; }
 @keyframes intro-fade { from { opacity: 0; } to { opacity: 1; } }
 .intro-skip { position: absolute; right: max(20px, env(safe-area-inset-right, 0px)); bottom: max(24px, env(safe-area-inset-bottom, 0px)); padding: 8px 14px; background: transparent; color: #fff; border: 1px solid rgba(255, 255, 255, .45); border-radius: 2px; font: 600 12px Inter, system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
 @media (prefers-reduced-motion: reduce) { .intro { display: none !important; } }
 @media print { .intro { display: none !important; } }
 </style>
-    <script src="./assets/intro.js?v=d8348d10"></script>
+    <script src="./assets/intro.js?v=ed897d29"></script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -2819,7 +2842,7 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
     </script>
   </head>
   <body>
-    <div class="intro" aria-hidden="true"><div class="intro-in"><div class="intro-logo"><span class="intro-bars"><i></i><i></i><i></i></span><span class="intro-word"><b>ECONAKL</b><small>TRANSPORT</small></span></div><div class="intro-road"><span class="intro-truck"></span></div><p class="intro-tag">Transport lourd et convoi exceptionnel au Maroc</p></div><button class="intro-skip" type="button" tabindex="-1">Passer</button></div>
+    <div class="intro" aria-hidden="true"><div class="intro-in"><div class="intro-logo"><span class="intro-bars"><i></i><i></i><i></i></span><span class="intro-word"><b>ECONAKL</b><small>TRANSPORT</small></span></div><div class="intro-road"><svg class="intro-rig" viewBox="0 0 220 72" focusable="false"><g class="ir-body"><path class="ir-l" d="M6 50 H150 V46 H6 Z"/><rect class="ir-load" x="22" y="18" width="104" height="28"/><path class="ir-strap" d="M48 18 V46 M100 18 V46"/><rect class="ir-flag" x="6" y="12" width="10" height="8"/><path class="ir-l" d="M150 50 H212 V40 L204 22 H178 V50"/><path class="ir-win" d="M182 26 H202 L208 38 H182 Z"/><path class="ir-l" d="M174 50 V14 M171 14 h6"/><rect class="ir-beacon" x="186" y="16" width="10" height="5"/></g><g class="iw"><circle cx="24" cy="58" r="8.5" class="iw-t"/><circle cx="24" cy="58" r="3" class="iw-h"/><path class="iw-s" d="M24 50.5 V65.5 M16.5 58 H31.5"/></g><g class="iw"><circle cx="44" cy="58" r="8.5" class="iw-t"/><circle cx="44" cy="58" r="3" class="iw-h"/><path class="iw-s" d="M44 50.5 V65.5 M36.5 58 H51.5"/></g><g class="iw"><circle cx="126" cy="58" r="8.5" class="iw-t"/><circle cx="126" cy="58" r="3" class="iw-h"/><path class="iw-s" d="M126 50.5 V65.5 M118.5 58 H133.5"/></g><g class="iw"><circle cx="166" cy="58" r="8.5" class="iw-t"/><circle cx="166" cy="58" r="3" class="iw-h"/><path class="iw-s" d="M166 50.5 V65.5 M158.5 58 H173.5"/></g><g class="iw"><circle cx="196" cy="58" r="8.5" class="iw-t"/><circle cx="196" cy="58" r="3" class="iw-h"/><path class="iw-s" d="M196 50.5 V65.5 M188.5 58 H203.5"/></g><g class="ir-smoke"><circle cx="174" cy="9" r="3"/><circle cx="168" cy="5" r="4"/><circle cx="160" cy="2" r="5"/></g></svg><i class="ir-dash"></i></div><p class="intro-tag">Transport lourd et convoi exceptionnel au Maroc</p></div><button class="intro-skip" type="button" tabindex="-1">Passer</button></div>
     <a class="skip-link" href="#contenu">Aller au contenu</a>
     <div class="site-shell">
       <div class="topbar">Transport lourd et convoi exceptionnel partout au Maroc. Devis sur étude d’itinéraire.</div>

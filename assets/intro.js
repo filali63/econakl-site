@@ -8,7 +8,7 @@
   d.classList.add("intro-on");
   try { sessionStorage.setItem("econakl-intro", "1"); } catch (e) {}
   function end() { d.classList.add("intro-done"); setTimeout(function () { d.classList.add("intro-off"); d.classList.remove("intro-on"); }, 700); }
-  var t = setTimeout(end, 2300);
+  var t = setTimeout(end, 2550);
   document.addEventListener("DOMContentLoaded", function () {
     var el = document.querySelector(".intro");
     if (el) el.addEventListener("click", function () { clearTimeout(t); end(); });
