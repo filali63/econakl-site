@@ -206,6 +206,14 @@
     if (match) typeSelect.value = typeParam;
   }
 
+  // Pré-remplissage depuis la demande rapide de l'accueil (?depart=…&arrivee=…&poids_t=…)
+  const quickParams = new URLSearchParams(window.location.search);
+  ["depart", "arrivee", "poids_t"].forEach((name) => {
+    const v = quickParams.get(name);
+    const el = field(name);
+    if (v && el && !el.value) el.value = v.slice(0, 120);
+  });
+
   const showStatus = (content, isError) => {
     status.textContent = "";
     if (typeof content === "string") status.textContent = content;

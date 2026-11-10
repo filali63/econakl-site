@@ -2750,6 +2750,22 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
 }
 @media (max-width: 520px) { .sb-grid { grid-template-columns: 1fr; } .sb { display: grid; grid-template-columns: 130px minmax(0, 1fr); column-gap: 16px; } .sb svg { grid-row: 1 / span 3; } .sb-n { margin: 0 0 6px; justify-self: start; } .ph { grid-template-columns: 110px minmax(0, 1fr); } }
 @media print { .toc { display: none; } }
+
+/* ---------- 30. Accueil : demande rapide sous le bandeau ---------- */
+.quick { background: var(--yellow); border-bottom: 1.5px solid var(--ink); }
+.quick-form { display: grid; grid-template-columns: auto minmax(0, 1.2fr) minmax(0, 1.2fr) minmax(0, 0.55fr) auto; gap: 14px; align-items: end; padding-top: 22px; padding-bottom: 22px; }
+.quick-title { margin: 0 14px 12px 0; color: var(--ink); font-size: 21px; font-weight: 600; letter-spacing: -0.03em; white-space: nowrap; }
+.quick-field { display: grid; gap: 6px; min-width: 0; }
+.quick-field span { color: var(--ink); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+.quick-field input { width: 100%; height: 50px; padding: 0 14px; background: #fff; color: var(--ink); border: 1.5px solid var(--ink); border-radius: 2px; font: inherit; font-size: 16px; }
+.quick-field input::placeholder { color: #676e72; }
+.quick-field input:focus-visible { outline: 3px solid var(--ink); outline-offset: 2px; }
+.quick-btn { height: 50px; padding: 0 22px; background: var(--ink); color: #fff; border: 1.5px solid var(--ink); border-radius: 2px; font: inherit; font-size: 15px; font-weight: 600; cursor: pointer; white-space: nowrap; }
+.quick-btn:hover { background: #2a3134; }
+.quick-btn:focus-visible { outline: 3px solid var(--ink); outline-offset: 3px; }
+@media (max-width: 1100px) { .quick-form { grid-template-columns: 1fr 1fr; } .quick-title { grid-column: 1 / -1; margin-bottom: 0; } .quick-btn { align-self: end; } }
+@media (max-width: 560px) { .quick-form { grid-template-columns: 1fr; } }
+@media print { .quick { display: none; } }
 </style>
     <script type="application/ld+json">
       [
@@ -2874,6 +2890,6 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
     </footer>
     <nav class="contact-bar" aria-label="Contact rapide"><a class="is-primary" href="./contact.html#devis">Demander un devis</a><a href="mailto:contact@econakl.com">Écrire un e-mail</a></nav>
     <script src="./assets/tools.js?v=9b5a6ed3"></script>
-    <script src="./assets/site.js?v=4ed76d28"></script>
+    <script src="./assets/site.js?v=a12076df"></script>
   </body>
 </html>
