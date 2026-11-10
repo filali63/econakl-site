@@ -2819,7 +2819,24 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
 @media (prefers-reduced-motion: reduce) { .intro { display: none !important; } }
 @media print { .intro { display: none !important; } }
 </style>
-    <script src="./assets/intro.js?v=ed897d29"></script>
+    <script>/* Écran d'ouverture : une fois par visite, passable, désactivé si l'utilisateur limite les animations. */
+(function () {
+  var d = document.documentElement;
+  var seen = false;
+  try { seen = sessionStorage.getItem("econakl-intro") === "1"; } catch (e) {}
+  var calm = window.matchMedia && matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (seen || calm) { d.classList.add("intro-off"); return; }
+  d.classList.add("intro-on");
+  try { sessionStorage.setItem("econakl-intro", "1"); } catch (e) {}
+  function end() { d.classList.add("intro-done"); setTimeout(function () { d.classList.add("intro-off"); d.classList.remove("intro-on"); }, 700); }
+  var t = setTimeout(end, 2550);
+  document.addEventListener("DOMContentLoaded", function () {
+    var el = document.querySelector(".intro");
+    if (el) el.addEventListener("click", function () { clearTimeout(t); end(); });
+  });
+  document.addEventListener("keydown", function k() { clearTimeout(t); end(); document.removeEventListener("keydown", k); });
+})();
+</script>
     <script type="application/ld+json">
       {
         "@context": "https://schema.org",
@@ -2899,7 +2916,525 @@ main > .section.dark:last-child .section-header p { max-width: 560px; font-size:
       <div class="footer-mark" aria-hidden="true">ECONAKL</div>
     </footer>
     <nav class="contact-bar" aria-label="Contact rapide"><a class="is-primary" href="./contact.html#devis">Demander un devis</a><a href="mailto:contact@econakl.com">Écrire un e-mail</a></nav>
-    <script src="./assets/tools.js?v=9b5a6ed3"></script>
-    <script src="./assets/site.js?v=a12076df"></script>
+    <script>/* ECONAKL Transport — petits outils de page (aucune dépendance).
+   1. Vérification indicative du gabarit : form[data-gabarit-check]
+      Limites : décret n° 2-10-421 (largeur 2,55 m, hauteur 4 m, longueur 16,50 m
+      pour un véhicule articulé, 40 t de poids total roulant).
+      Catégories autoroute : classification d'Autoroutes du Maroc.
+   2. Bouton d'impression : [data-print]
+   3. Pré-remplissage du formulaire de devis depuis l'adresse (?l=&w=&h=&p=) */
+(() => {
+  "use strict";
+  const doc = document;
+  const en = (doc.documentElement.lang || "fr").toLowerCase().startsWith("en");
+  const LIMITS = { longueur: 16.5, largeur: 2.55, hauteur: 4, poids: 40 };
+  const UNIT = { longueur: "m", largeur: "m", hauteur: "m", poids: "t" };
+
+  const t = en
+    ? {
+        names: { longueur: "Length", largeur: "Width", hauteur: "Height", poids: "Weight" },
+        over: (n, v, l) => `${n} ${v}: over the ${l} limit`,
+        ok: (n, v, l) => `${n} ${v}: within the ${l} limit`,
+        empty: "Enter at least one measurement of your cargo.",
+        exTitle: "Abnormal load: a permit is required",
+        okTitle: "Your cargo alone is within the road limits",
+        okText: "To be confirmed once loaded: the height of the trailer deck and the weight of the truck are added to those of the cargo.",
+        exText: "These limits apply to the loaded convoy. The height of the trailer deck and the weight of the truck are added to those of the cargo.",
+        cat: (c) => `On the motorway (Autoroutes du Maroc classification): category ${c}.`,
+        cta: "Request a quote with these measurements",
+        fmt: (v) => String(v),
+      }
+    : {
+        names: { longueur: "Longueur", largeur: "Largeur", hauteur: "Hauteur", poids: "Poids" },
+        over: (n, v, l) => `${n} ${v} : dépasse la limite de ${l}`,
+        ok: (n, v, l) => `${n} ${v} : dans la limite de ${l}`,
+        empty: "Indiquez au moins une mesure de votre colis.",
+        exTitle: "Transport exceptionnel : une autorisation est nécessaire",
+        okTitle: "Votre colis seul reste dans les limites routières",
+        okText: "À confirmer une fois chargé : la hauteur du plateau de la remorque et le poids du camion s’ajoutent à ceux du colis.",
+        exText: "Ces limites concernent le convoi chargé. La hauteur du plateau de la remorque et le poids du camion s’ajoutent à ceux du colis.",
+        cat: (c) => `Sur autoroute (classification d’Autoroutes du Maroc) : ${c === 1 ? "1re" : c + "e"} catégorie.`,
+        cta: "Demander un devis avec ces mesures",
+        fmt: (v) => String(v).replace(".", ","),
+      };
+
+  const num = (v) => {
+    const n = parseFloat(String(v || "").replace(",", "."));
+    return Number.isFinite(n) && n > 0 ? n : null;
+  };
+  const el = (tag, cls, text) => {
+    const e = doc.createElement(tag);
+    if (cls) e.className = cls;
+    if (text) e.textContent = text;
+    return e;
+  };
+
+  /* ---------- 1. Vérification du gabarit ---------- */
+  const check = doc.querySelector("[data-gabarit-check]");
+  if (check) {
+    const out = check.querySelector("[data-check-result]");
+    check.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const v = {};
+      Object.keys(LIMITS).forEach((k) => (v[k] = num(check.elements[k] && check.elements[k].value)));
+      out.hidden = false;
+      out.replaceChildren();
+      out.classList.remove("is-over", "is-ok");
+      if (!Object.values(v).some(Boolean)) {
+        out.append(el("p", "", t.empty));
+        return;
+      }
+      const over = Object.keys(LIMITS).filter((k) => v[k] && v[k] > LIMITS[k]);
+      out.classList.add(over.length ? "is-over" : "is-ok");
+      out.append(el("h3", "", over.length ? t.exTitle : t.okTitle));
+      const ul = el("ul", "checker-list");
+      Object.keys(LIMITS).forEach((k) => {
+        if (!v[k]) return;
+        const isOver = v[k] > LIMITS[k];
+        const txt = (isOver ? t.over : t.ok)(t.names[k], `${t.fmt(v[k])} ${UNIT[k]}`, `${t.fmt(LIMITS[k])} ${UNIT[k]}`);
+        ul.append(el("li", isOver ? "over" : "", txt));
+      });
+      out.append(ul);
+      if (over.length) {
+        // Catégorie autoroute : la plus élevée des trois mesures classées (longueur, largeur, masse)
+        const c = Math.max(
+          v.longueur ? (v.longueur > 26 ? 3 : v.longueur >= 18 ? 2 : 1) : 1,
+          v.largeur ? (v.largeur > 3.5 ? 3 : v.largeur >= 3 ? 2 : 1) : 1,
+          v.poids ? (v.poids > 70 ? 3 : v.poids >= 45 ? 2 : 1) : 1
+        );
+        out.append(el("p", "", t.cat(c)));
+      }
+      out.append(el("p", "", over.length ? t.exText : t.okText));
+      const q = new URLSearchParams();
+      if (v.longueur) q.set("l", v.longueur);
+      if (v.largeur) q.set("w", v.largeur);
+      if (v.hauteur) q.set("h", v.hauteur);
+      if (v.poids) q.set("p", v.poids);
+      const a = el("a", "btn btn-primary", t.cta);
+      a.href = `./contact.html?${q.toString()}#devis`;
+      out.append(a);
+    });
+  }
+
+  /* ---------- 2. Impression ---------- */
+  doc.querySelectorAll("[data-print]").forEach((b) => b.addEventListener("click", () => window.print()));
+
+  /* ---------- 3. Pré-remplissage du devis ---------- */
+  const quote = doc.querySelector("[data-quote-form]");
+  if (quote && window.location.search) {
+    const p = new URLSearchParams(window.location.search);
+    const map = { l: "longueur_m", w: "largeur_m", h: "hauteur_m", p: "poids_t" };
+    Object.keys(map).forEach((k) => {
+      const n = num(p.get(k));
+      const f = quote.elements[map[k]];
+      if (n && f && !f.value) f.value = n;
+    });
+  }
+})();
+</script>
+    <script>/* ECONAKL Transport — scripts du site.
+   1. Menu mobile accessible
+   2. Formulaire de demande de devis (validation + email pré-rempli vers contact@econakl.com)
+   Aucune animation, aucun observateur de défilement. Chaque bloc ne s'exécute que si
+   les éléments existent sur la page. */
+(() => {
+  "use strict";
+
+  const doc = document;
+  const body = doc.body;
+  const isEnglish = (doc.documentElement.lang || "").toLowerCase().startsWith("en");
+  const MAIL_TO = "contact@econakl.com";
+
+  /* ------------------------------------------------------------------
+     1. Menu mobile
+     - bouton placé AVANT les liens dans le DOM (Tab entre dans le menu)
+     - aria-expanded / aria-controls / libellé ouvrir-fermer
+     - menu fermé : liens masqués (visibility: hidden en CSS) et inert
+     - Échap ferme et rend le focus au bouton ; clic hors du menu ferme
+     - piège de focus léger : Tab boucle entre le bouton et les liens
+     ------------------------------------------------------------------ */
+  const nav = doc.querySelector(".navbar");
+  const navLinks = doc.querySelector(".nav-links");
+
+  if (nav && navLinks) {
+    const mobileQuery = window.matchMedia("(max-width: 980px)");
+    const labels = isEnglish
+      ? { open: "Open menu", close: "Close menu" }
+      : { open: "Ouvrir le menu", close: "Fermer le menu" };
+
+    navLinks.id = navLinks.id || "navigation-principale";
+    body.classList.add("has-mobile-nav");
+
+    // Le HTML peut déjà contenir le bouton : on le réutilise, sinon on le crée.
+    let toggle = nav.querySelector(".nav-toggle");
+    if (!toggle) {
+      toggle = doc.createElement("button");
+      toggle.className = "nav-toggle";
+      toggle.type = "button";
+    }
+    if (!toggle.querySelector(".nav-toggle-lines")) {
+      const lines = doc.createElement("span");
+      lines.className = "nav-toggle-lines";
+      lines.setAttribute("aria-hidden", "true");
+      toggle.appendChild(lines);
+    }
+    if (toggle.nextElementSibling !== navLinks) navLinks.parentNode.insertBefore(toggle, navLinks);
+    toggle.setAttribute("aria-controls", navLinks.id);
+
+    const isOpen = () => body.classList.contains("mobile-nav-open");
+    const focusables = () =>
+      [toggle, ...navLinks.querySelectorAll("a[href], button:not([disabled])")].filter(
+        (el) => el.offsetParent !== null || el === toggle
+      );
+
+    const sync = () => {
+      const open = isOpen();
+      toggle.setAttribute("aria-expanded", String(open));
+      toggle.setAttribute("aria-label", open ? labels.close : labels.open);
+      // Sur mobile, menu fermé = inaccessible au clavier et aux lecteurs d'écran.
+      if (mobileQuery.matches && !open) navLinks.setAttribute("inert", "");
+      else navLinks.removeAttribute("inert");
+    };
+
+    const openMenu = () => {
+      body.classList.add("mobile-nav-open");
+      sync();
+    };
+    const closeMenu = (returnFocus) => {
+      if (!isOpen()) return;
+      body.classList.remove("mobile-nav-open");
+      sync();
+      if (returnFocus) toggle.focus();
+    };
+
+    toggle.addEventListener("click", () => (isOpen() ? closeMenu(false) : openMenu()));
+
+    navLinks.addEventListener("click", (event) => {
+      if (event.target.closest("a")) closeMenu(false);
+    });
+
+    doc.addEventListener("click", (event) => {
+      if (isOpen() && !nav.contains(event.target)) closeMenu(false);
+    });
+
+    doc.addEventListener("keydown", (event) => {
+      if (!isOpen()) return;
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeMenu(true);
+        return;
+      }
+      if (event.key === "Tab") {
+        const items = focusables();
+        if (!items.length) return;
+        const first = items[0];
+        const last = items[items.length - 1];
+        if (event.shiftKey && doc.activeElement === first) {
+          event.preventDefault();
+          last.focus();
+        } else if (!event.shiftKey && doc.activeElement === last) {
+          event.preventDefault();
+          first.focus();
+        }
+      }
+    });
+
+    // Retour au format bureau : le menu redevient une barre normale.
+    const onBreakpoint = () => {
+      if (!mobileQuery.matches) body.classList.remove("mobile-nav-open");
+      sync();
+    };
+    if (mobileQuery.addEventListener) mobileQuery.addEventListener("change", onBreakpoint);
+    else if (mobileQuery.addListener) mobileQuery.addListener(onBreakpoint);
+
+    sync();
+  }
+
+  /* ------------------------------------------------------------------
+     2. Formulaire de devis
+     Formulaire structuré : form[data-quote-form] (champs de la spec 7.3 :
+     type_demande, nom, societe, fonction, email, telephone, pays,
+     cargo_description, nb_colis, longueur_m, largeur_m, hauteur_m, poids_t,
+     dimensions_inconnues, chargement, depart, depart_type, arrivee,
+     arrivee_type, date_dispo, date_souhaitee, besoins[], message,
+     consentement, entreprise_site [piège à robots]).
+     Compatible avec l'ancien form[data-contact-form] (name, email, scope, message).
+     Envoi : ouverture de la messagerie avec un email pré-rempli vers
+     contact@econakl.com (site statique, pas de service tiers).
+     ------------------------------------------------------------------ */
+  const form = doc.querySelector("[data-quote-form]") || doc.querySelector("[data-contact-form]");
+  if (!form) return;
+
+  const t = isEnglish
+    ? {
+        missing: "Please complete the required fields (*). They are outlined in red.",
+        dims: "Give at least one dimension or the weight, or tick the box if you don't have them yet.",
+        dates: "The requested delivery date must be on or after the availability date.",
+        ready:
+          "Your email app is opening with the request prepared. Send the email so that we receive it. If nothing opens, ",
+        readyLink: "click here",
+        readyEnd: ` or write to ${MAIL_TO}.`,
+        subject: "Quote request",
+        intro: "Hello Econakl,\n\nPlease find my transport request below.",
+        yes: "Yes",
+        sep: ": ",
+        unknown: "to be confirmed",
+      }
+    : {
+        missing: "Complétez les champs obligatoires (*). Ils sont signalés en rouge.",
+        dims: "Indiquez au moins une dimension ou le poids, ou cochez la case si vous ne les avez pas encore.",
+        dates: "La date de livraison souhaitée doit être postérieure ou égale à la date de disponibilité.",
+        ready:
+          "Votre messagerie s'ouvre avec la demande pré-remplie. Envoyez l'email pour que nous la recevions. Si rien ne s'ouvre, ",
+        readyLink: "cliquez ici",
+        readyEnd: ` ou écrivez à ${MAIL_TO}.`,
+        subject: "Demande de devis",
+        intro: "Bonjour Econakl,\n\nVoici ma demande de transport.",
+        yes: "Oui",
+        sep: " : ",
+        unknown: "à confirmer",
+      };
+
+  // Validation gérée ici, dans la langue de la page (pas les bulles du navigateur).
+  form.noValidate = true;
+
+  const status =
+    form.querySelector("[data-form-status]") ||
+    (() => {
+      const p = doc.createElement("p");
+      p.className = "form-status";
+      p.setAttribute("data-form-status", "");
+      const btn = form.querySelector('[type="submit"]');
+      form.insertBefore(p, btn || null);
+      return p;
+    })();
+  status.setAttribute("aria-live", "polite");
+
+  const field = (name) => form.elements.namedItem(name);
+  const SKIP = new Set(["access_key", "subject", "from_name", "entreprise_site", "consentement", "redirect", "botcheck"]);
+  const DIMS = ["longueur_m", "largeur_m", "hauteur_m", "poids_t"];
+
+  // Date minimale = aujourd'hui (date locale)
+  const today = (() => {
+    const d = new Date();
+    d.setMinutes(d.getMinutes() - d.getTimezoneOffset());
+    return d.toISOString().slice(0, 10);
+  })();
+  ["date_dispo", "date_souhaitee"].forEach((n) => {
+    const el = field(n);
+    if (el && el.type === "date" && !el.min) el.min = today;
+  });
+  const dispo = field("date_dispo");
+  const souhaitee = field("date_souhaitee");
+  if (dispo && souhaitee) {
+    dispo.addEventListener("change", () => {
+      souhaitee.min = dispo.value || today;
+    });
+  }
+
+  // Pré-sélection du type via ?type=partenaire
+  const typeParam = new URLSearchParams(window.location.search).get("type");
+  const typeSelect = field("type_demande");
+  if (typeParam && typeSelect && typeSelect.options) {
+    const match = [...typeSelect.options].find((o) => o.value === typeParam);
+    if (match) typeSelect.value = typeParam;
+  }
+
+  // Pré-remplissage depuis la demande rapide de l'accueil (?depart=…&arrivee=…&poids_t=…)
+  const quickParams = new URLSearchParams(window.location.search);
+  ["depart", "arrivee", "poids_t"].forEach((name) => {
+    const v = quickParams.get(name);
+    const el = field(name);
+    if (v && el && !el.value) el.value = v.slice(0, 120);
+  });
+
+  const showStatus = (content, isError) => {
+    status.textContent = "";
+    if (typeof content === "string") status.textContent = content;
+    else status.appendChild(content);
+    status.classList.add("is-visible");
+    status.classList.toggle("is-error", Boolean(isError));
+    // Erreur : annonce immédiate ; information : annonce polie
+    status.setAttribute("role", isError ? "alert" : "status");
+  };
+
+  const clearInvalid = (el) => {
+    el.removeAttribute("aria-invalid");
+  };
+  form.addEventListener("input", (e) => {
+    if (e.target.getAttribute && e.target.getAttribute("aria-invalid")) clearInvalid(e.target);
+    if (DIMS.includes(e.target.name) || e.target.name === "dimensions_inconnues") {
+      DIMS.forEach((n) => field(n) && clearInvalid(field(n)));
+    }
+  });
+  form.addEventListener("change", (e) => {
+    if (e.target.type === "checkbox" && e.target.getAttribute("aria-invalid")) clearInvalid(e.target);
+    if (e.target.name === "dimensions_inconnues") DIMS.forEach((n) => field(n) && clearInvalid(field(n)));
+  });
+
+  // Libellé lisible d'un champ, pour le corps de l'email
+  const labelOf = (el) => {
+    let text = "";
+    if (el.id) {
+      const l = form.querySelector(`label[for="${CSS.escape(el.id)}"]`);
+      if (l) text = l.textContent;
+    }
+    if (!text) {
+      const wrap = el.closest("label");
+      if (wrap) text = wrap.textContent;
+    }
+    if (!text) text = el.getAttribute("aria-label") || el.getAttribute("placeholder") || el.name;
+    return text.replace(/\s*\*\s*/g, " ").replace(/\s+/g, " ").trim();
+  };
+  const groupLabelOf = (el) => {
+    const group = el.closest(".field");
+    const gl = group && group.querySelector(".field-label");
+    return gl ? gl.textContent.trim() : labelOf(el);
+  };
+
+  const buildBody = () => {
+    const lines = [t.intro, ""];
+    let section = null;
+    const multi = new Map();
+    [...form.elements].forEach((el) => {
+      if (!el.name || SKIP.has(el.name) || el.disabled) return;
+      if (["hidden", "submit", "button", "reset", "file"].includes(el.type)) return;
+
+      const legend = el.closest("fieldset") && el.closest("fieldset").querySelector("legend");
+      const sectionName = legend ? legend.textContent.trim().toUpperCase() : null;
+      if (sectionName && sectionName !== section) {
+        section = sectionName;
+        lines.push("", `— ${section} —`);
+      }
+
+      if (el.type === "checkbox") {
+        if (!el.checked) return;
+        if (el.name.endsWith("[]") || form.querySelectorAll(`[name="${CSS.escape(el.name)}"]`).length > 1) {
+          const key = groupLabelOf(el);
+          if (!multi.has(key)) {
+            multi.set(key, []);
+            lines.push({ multi: key });
+          }
+          multi.get(key).push(labelOf(el));
+        } else {
+          lines.push(`${labelOf(el)}${t.sep}${t.yes}`);
+        }
+        return;
+      }
+      if (el.type === "radio" && !el.checked) return;
+
+      let value = String(el.value || "").trim();
+      if (el.tagName === "SELECT" && el.selectedIndex >= 0 && value) {
+        value = el.options[el.selectedIndex].text.trim();
+      }
+      if (!value) return;
+      if (el.tagName === "TEXTAREA") lines.push(`${labelOf(el)}${t.sep.trimEnd()}`, value);
+      else lines.push(`${labelOf(el)}${t.sep}${value}`);
+    });
+    return lines
+      .map((l) => (typeof l === "string" ? l : `${l.multi}${t.sep}${multi.get(l.multi).join(", ")}`))
+      .join("\n")
+      .replace(/\n{3,}/g, "\n\n")
+      .trim();
+  };
+
+  const buildSubject = () => {
+    const parts = [t.subject];
+    const type = typeSelect && typeSelect.value ? typeSelect.options[typeSelect.selectedIndex].text.trim() : "";
+    const scope = field("scope") && field("scope").value ? field("scope").value.trim() : "";
+    if (type || scope) parts.push(type || scope);
+    const dep = field("depart") && field("depart").value.trim();
+    const arr = field("arrivee") && field("arrivee").value.trim();
+    if (dep && arr) parts.push(`${dep} → ${arr}`);
+    const soc = (field("societe") && field("societe").value.trim()) || (field("nom") && field("nom").value.trim()) || (field("name") && field("name").value.trim());
+    if (soc) parts.push(soc);
+    return `Econakl — ${parts.join(" — ")}`;
+  };
+
+  // Secours si aucune messagerie ne s'ouvre : copier la demande dans le presse-papiers
+  const copyBtn = form.querySelector("[data-copy-quote]");
+  if (copyBtn && navigator.clipboard) {
+    copyBtn.addEventListener("click", () => {
+      const text = `${buildSubject()}\n\n${buildBody()}`;
+      navigator.clipboard.writeText(text).then(
+        () => showStatus(isEnglish ? `Request copied. Paste it into an email to ${MAIL_TO}.` : `Demande copiée. Collez-la dans un e-mail adressé à ${MAIL_TO}.`, false),
+        () => showStatus(isEnglish ? `Copy failed. Write to ${MAIL_TO}.` : `La copie a échoué. Écrivez à ${MAIL_TO}.`, true)
+      );
+    });
+  } else if (copyBtn) {
+    copyBtn.hidden = true;
+  }
+
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+
+    // Piège à robots : rempli = envoi ignoré sans message
+    const hp = field("entreprise_site");
+    if (hp && hp.value) return;
+
+    form.querySelectorAll("[aria-invalid]").forEach(clearInvalid);
+
+    let valid = true;
+    let message = t.missing;
+
+    // Champs obligatoires et formats (email, téléphone, bornes numériques…)
+    [...form.elements].forEach((el) => {
+      if (!el.willValidate || el.type === "hidden" || el.name === "entreprise_site") return;
+      // Un champ obligatoire rempli uniquement d'espaces est vide
+      if (el.required && el.type !== "checkbox" && el.type !== "radio" && !String(el.value).trim()) {
+        el.setAttribute("aria-invalid", "true");
+        valid = false;
+        return;
+      }
+      // L'ordre des dates est vérifié plus bas, avec son propre message
+      if (el === souhaitee && el.validity.rangeUnderflow && !el.validity.badInput) return;
+      if (!el.checkValidity()) {
+        el.setAttribute("aria-invalid", "true");
+        valid = false;
+      }
+    });
+
+    // Au moins une dimension ou le poids, ou la case « je ne sais pas encore »
+    const dimFields = DIMS.map(field).filter(Boolean);
+    const unknown = field("dimensions_inconnues");
+    if (dimFields.length && unknown) {
+      const hasDim = dimFields.some((el) => String(el.value).trim());
+      if (!hasDim && !unknown.checked) {
+        dimFields.forEach((el) => el.setAttribute("aria-invalid", "true"));
+        if (valid) message = t.dims;
+        else message = `${t.missing} ${t.dims}`;
+        valid = false;
+      }
+    }
+
+    // Livraison souhaitée ≥ disponibilité
+    if (dispo && souhaitee && dispo.value && souhaitee.value && souhaitee.value < dispo.value) {
+      souhaitee.setAttribute("aria-invalid", "true");
+      message = valid ? t.dates : `${message} ${t.dates}`;
+      valid = false;
+    }
+
+    if (!valid) {
+      showStatus(message, true);
+      const firstInvalid = form.querySelector('[aria-invalid="true"]');
+      if (firstInvalid) firstInvalid.focus();
+      return;
+    }
+
+    const href = `mailto:${MAIL_TO}?subject=${encodeURIComponent(buildSubject())}&body=${encodeURIComponent(buildBody())}`;
+
+    // Confirmation honnête : l'email est préparé, il reste à l'envoyer.
+    const frag = doc.createDocumentFragment();
+    frag.append(t.ready);
+    const link = doc.createElement("a");
+    link.href = href;
+    link.textContent = t.readyLink;
+    frag.append(link, t.readyEnd);
+    showStatus(frag, false);
+
+    window.location.href = href;
+  });
+})();
+</script>
   </body>
 </html>

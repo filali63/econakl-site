@@ -28,7 +28,7 @@
         { "key": "Cross-Origin-Opener-Policy", "value": "same-origin" },
         {
           "key": "Content-Security-Policy",
-          "value": "default-src 'self'; script-src 'self'; style-src 'self' 'sha256-dMhrFzMlzXd6ALA6n5aso3bxqVqIijNi/sQFuIAI+9k=' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://upload.wikimedia.org; connect-src 'self'; manifest-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+          "value": "default-src 'self'; script-src 'self' 'sha256-+8XQxWkVLyK0zwRSw6uFuYQVrj/6CCQi3qs7vys+j5g=' 'sha256-8DFtp2NfOecj8aa9OTvy8llv6qVL6p6EeSUm1Q4d2Wg=' 'sha256-e0HHyoPhuv0Nj7Dt4SWdE1voPQyc61lc1CNojAWr+Cc='; style-src 'self' 'sha256-dMhrFzMlzXd6ALA6n5aso3bxqVqIijNi/sQFuIAI+9k=' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://images.unsplash.com https://upload.wikimedia.org; connect-src 'self'; manifest-src 'self'; form-action 'self' mailto:; frame-ancestors 'none'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
         }
       ]
     },
